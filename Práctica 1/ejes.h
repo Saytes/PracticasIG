@@ -1,3 +1,4 @@
+//Archivo perteneciente a la P1 de Jorge Gutiérrez Segovia
 #ifndef _EJES_H
 #define _EJES_H
 

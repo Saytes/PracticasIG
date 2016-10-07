@@ -1,3 +1,4 @@
+//Archivo perteneciente a la P1 de Jorge Gutiérrez Segovia
 #ifndef _ESCENA_H
 #define _ESCENA_H
 #include "ejes.h"

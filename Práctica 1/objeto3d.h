@@ -1,3 +1,4 @@
+//Archivo perteneciente a la P1 de Jorge Gutiérrez Segovia
 #ifndef _MALLA_H
 #define _MALLA_H
 #include<vector>
@@ -13,15 +14,15 @@ typedef GLuint Natural; //Número int unsigned de mínimo 32 bits
 
 //Clase principal de la cual heredan Cubo y Tetraedro
 
-class Objeto3d{	
-	
+class Objeto3d{
+
 	public:
 		//Objeto3d(); // Constructor por defecto
 		//drawObjeto3d();
-		
+
 	private:
 
-		Natural nver;				// Número total de vértices	
+		Natural nver;				// Número total de vértices
 		Natural ntri;				// Número total de triángulos
 		std::vector<Real> vertices;		// Vector de Vértices
 		std::vector<Natural> caras;		// Vector de Caras

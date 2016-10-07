@@ -1,3 +1,4 @@
+//Archivo perteneciente a la P1 de Jorge Gutiérrez Segovia
 #ifdef _WIN32
 #include <windows.h>
 #endif
