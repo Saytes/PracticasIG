@@ -1,6 +1,5 @@
 #ifndef _ESCENA_H
 #define _ESCENA_H
-//asdafd
 #include "ejes.h"
 
 class Escena {
