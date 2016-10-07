@@ -7,7 +7,7 @@
 #include <GL/glut.h>
 #include "escena.h"
 
-//1
+
 Escena::Escena(){
     Front_plane=50;
     Back_plane=2000;
