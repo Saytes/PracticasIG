@@ -7,7 +7,7 @@
 #include <GL/glut.h>
 #include "escena.h"
 
-
+//1
 Escena::Escena(){
     Front_plane=50;
     Back_plane=2000;
@@ -69,7 +69,7 @@ switch (Tecla1){
 
 
 //**************************************************************************
-// Funcion para definir la transformación de proyeccion
+// Funcion para definir la transformaciï¿½n de proyeccion
 //***************************************************************************
 
 void Escena::change_projection()  {
@@ -88,7 +88,7 @@ glViewport(0,0,newWidth,newHeight);
 
 
 //**************************************************************************
-// Funcion para definir la transformación de vista (posicionar la camara)
+// Funcion para definir la transformaciï¿½n de vista (posicionar la camara)
 //***************************************************************************
 
 
@@ -112,7 +112,3 @@ void Escena::draw_axis()
 {
 ejes.draw();
 }
-
-
-
-
