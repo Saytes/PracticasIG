@@ -1,11 +1,11 @@
 #ifndef _ESCENA_H
 #define _ESCENA_H
-
+//asdafd
 #include "ejes.h"
 
 class Escena {
 private:
-// tamaño de los ejes
+// tamaï¿½o de los ejes
 #define AXIS_SIZE 5000
 Ejes ejes;
 
@@ -22,7 +22,7 @@ private:
 	void draw_axis();
 	void draw_objects();
 
-//Transformación de cámara
+//Transformaciï¿½n de cï¿½mara
 	void change_projection();
 	void change_observer();
 
@@ -35,7 +35,7 @@ public:
 	// Dibujar
 	void dibujar() ;
 
-	// Interacción con la escena
+	// Interacciï¿½n con la escena
 	int teclaPulsada(unsigned char Tecla1,int x,int y) ;
 	void teclaEspecial(int Tecla1,int x,int y);
 };
