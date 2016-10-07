@@ -2,7 +2,7 @@
 #define _EJES_H
 
 class Ejes {
-
+//Linea
 private:
 	float axisSize;
 	float vertexArray[18];
