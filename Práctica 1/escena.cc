@@ -69,9 +69,11 @@ void Escena::dibujar() {
 int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
 
     std::cout << "La Tecla pulsada es: " << Tecla1<< std::endl;
-	if (toupper(Tecla1)=='Q')
-        return 1;
 
+    if (toupper(Tecla1)=='Q'){
+        std::cout << "La acción es salir."<< std::endl;
+        return 1;
+    }
     else if (toupper(Tecla1)=='L' || toupper(Tecla1)=='l' || toupper(Tecla1)=='P'
             || toupper(Tecla1)=='p' || toupper(Tecla1)=='N' || toupper(Tecla1)=='n' ){
 
@@ -82,10 +84,10 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                 case 'L':
                     mostrarM="Lineas";
                     break;
-                case 'N':
+                case 'P':
                     mostrarM="Puntos";
                     break;
-                case 'P':
+                case 'N':
                     mostrarM="Normal";
                     break;
 
