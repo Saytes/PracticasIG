@@ -26,15 +26,16 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoDibujo modo) const{
             modoD = GL_TRIANGLES;
             break;
     }
-    int verticex,verticey,verticez;
 
-    for (int i= 0; i < caras.size(); i++){
+    /*for (int i= 0; i < caras.size(); i++){
          // Cambio de color para el ajedrez
          if (modo == AJEDREZ && i %2 == 0)
              glColor3f(1, 0, 0);
          else
              glColor3f(0, 1, 0);
-    }
+    }*/
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer( 3, GL_FLOAT, 0, &vertices[0]);
+    glDrawElements( modoD, caras.size() , GL_UNSIGNED_INT, &caras[0]) ;
 
-    glDrawElements( modoD, 3*mesh->ntri, GL_UNSIGNED_INT, mesh->triangulos ) ;
 }
