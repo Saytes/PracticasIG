@@ -42,16 +42,17 @@ void Escena::draw_objects() {
 
     switch (modoD) {
 
-        case 1:
+        case 'L':
             cubo1 -> drawObjeto3d(Objeto3d::LINEAS);
             break;
-        case 2:
-            cubo1 -> drawObjeto3d(Objeto3d::PUNTOS);
-            break;
-        case 3:
-            cubo1 -> drawObjeto3d(Objeto3d::NORMAL);
-            break;
-    }
+
+        case 'N':
+                cubo1 -> drawObjeto3d(Objeto3d::NORMAL);
+                break;
+        case 'P':
+                cubo1 -> drawObjeto3d(Objeto3d::PUNTOS);
+                break;
+        }
 //cubo1 -> drawObjeto3d(modoD);
 }
 
@@ -70,23 +71,27 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
     std::cout << "La Tecla pulsada es: " << Tecla1<< std::endl;
 	if (toupper(Tecla1)=='Q')
         return 1;
-    else if (Tecla1 == '1' || Tecla1 == '2' || Tecla1 == '3'){
-        modoD = (int)Tecla1 - 48; // Restamos 48 para sacar el valor en código ascii
 
-        switch (modoD) {
+    else if (toupper(Tecla1)=='L' || toupper(Tecla1)=='l' || toupper(Tecla1)=='P'
+            || toupper(Tecla1)=='p' || toupper(Tecla1)=='N' || toupper(Tecla1)=='n' ){
 
-            case 1:
-                mostrarM="Lineas";
-                break;
-            case 2:
-                mostrarM="Puntos";
-                break;
-            case 3:
-                mostrarM="Normal";
-                break;
-        }
-        std::cout << "Cambiado a modo " << mostrarM << std::endl;
-        return 0;
+            modoD = toupper(Tecla1); // Restamos 48 para sacar el valor en código ascii
+
+            switch (modoD) {
+
+                case 'L':
+                    mostrarM="Lineas";
+                    break;
+                case 'N':
+                    mostrarM="Puntos";
+                    break;
+                case 'P':
+                    mostrarM="Normal";
+                    break;
+
+            }
+            std::cout << "Cambiado a modo " << mostrarM << std::endl;
+            return 0;
     }
 	else return 0;
 }

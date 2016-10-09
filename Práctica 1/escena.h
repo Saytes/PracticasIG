@@ -30,8 +30,8 @@ private:
 
 // Variables para cambiar de modo y objetos
     Cubo *cubo1;
- 	int modoD;
-	std::string mostrarM="";
+ 	char modoD;
+	std::string mostrarM;
 
 
 public:
