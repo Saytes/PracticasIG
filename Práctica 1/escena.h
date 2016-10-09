@@ -30,9 +30,9 @@ private:
 	void change_observer();
 
 // Variables para cambiar de modo y objetos
-    Cubo *cubo1;
-	Tetraedro *tetraedro1;
- 	char modoD;
+ 	Objeto3d *objeto3d;
+	char modo;
+	bool ajedrez;
 	std::string mostrarM;
 
 

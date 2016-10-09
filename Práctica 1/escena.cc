@@ -17,9 +17,8 @@ Escena::Escena(){
     Observer_distance = 4*Front_plane;
     Observer_angle_x = Observer_angle_y=0;
     ejes.changeAxisSize(5000);
-    cubo1= new Cubo();
-    tetraedro1 = new Tetraedro();
-
+    objeto3d = new Objeto3d();
+    ajedrez=false;
 }
 
 void Escena::inicializar(int UI_window_width,int UI_window_height) {
@@ -41,29 +40,33 @@ void Escena::inicializar(int UI_window_width,int UI_window_height) {
 //***************************************************************************
 void Escena::draw_objects() {
 
-    switch (modoD) {
+    switch (modo) {
 
         case 'A':
-            cubo1 -> drawObjeto3d(Objeto3d::LINEAS);
+            objeto3d -> drawObjeto3d(Objeto3d::LINEAS,Objeto3d::LINE,ajedrez);
             break;
 
         case 'S':
-            cubo1 -> drawObjeto3d(Objeto3d::NORMAL);
+            objeto3d -> drawObjeto3d(Objeto3d::NORMAL,Objeto3d::FILL,ajedrez);
             break;
 
         case 'P':
-                cubo1 -> drawObjeto3d(Objeto3d::PUNTOS);
-                break;
+            objeto3d -> drawObjeto3d(Objeto3d::PUNTOS,Objeto3d::FILL,ajedrez);
+            break;
+
+        case 'X':
+            objeto3d -> drawObjeto3d(Objeto3d::PUNTOS,Objeto3d::FILL,ajedrez);
+            break;
 
         case 'C':
-                cubo1 -> drawObjeto3d(Objeto3d::NORMAL);
-                break;
-
+            objeto3d -> drawObjeto3d(Objeto3d::LINEAS,Objeto3d::FILL,ajedrez);
+            break;
         case 'T':
-                tetraedro1 -> drawObjeto3d(Objeto3d::LINEAS);
-                break;
+            objeto3d -> drawObjeto3d(Objeto3d::LINEAS,Objeto3d::FILL,ajedrez);
+            break;
+
         }
-//cubo1 -> drawObjeto3d(modoD);
+
 }
 
 
@@ -82,30 +85,43 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
 
     if (toupper(Tecla1)=='Q'){
         std::cout << "La acción es salir."<< std::endl;
+
         return 1;
     }
-    else if (toupper(Tecla1)=='A' || toupper(Tecla1)=='a' || toupper(Tecla1)=='P'
-            || toupper(Tecla1)=='p' || toupper(Tecla1)=='S' || toupper(Tecla1)=='s'
-            || toupper(Tecla1)=='T' || toupper(Tecla1=='t')){
+    else if (toupper(Tecla1)=='A' | toupper(Tecla1)=='P' || toupper(Tecla1)=='S'
+            || toupper(Tecla1)=='T'|| toupper(Tecla1)=='C' || toupper(Tecla1)=='X'){
 
-            modoD = toupper(Tecla1); // Restamos 48 para sacar el valor en código ascii
+            modo = toupper(Tecla1); // Restamos 48 para sacar el valor en código ascii
 
-            switch (modoD) {
+            switch (modo) {
 
                 case 'A':
                     mostrarM="Alambre";
+                    ajedrez=false;
                     break;
                 case 'P':
                     mostrarM="Puntos";
+                    ajedrez=false;
                     break;
                 case 'S':
                     mostrarM="Sólido";
+                    ajedrez=false;
                     break;
-
+                case 'X':
+                    mostrarM="Ajedrez";
+                    ajedrez=true;
+                    break;
                 case 'T':
+                    objeto3d = new Tetraedro();
+                    ajedrez=false;
                     mostrarM="Tetraedro";
                     break;
 
+                case 'C':
+                    objeto3d = new Cubo();
+                    ajedrez=false;
+                    mostrarM="Cubo";
+                    break;
             }
             std::cout << "Cambiado a modo " << mostrarM << std::endl;
             return 0;

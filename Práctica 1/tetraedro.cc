@@ -21,7 +21,7 @@ Tetraedro::Tetraedro(){
 	vertices.push_back(50.0);
 	//----------------
 	vertices.push_back(-50.0);
-	vertices.push_back(50.0f);
+	vertices.push_back(50.0);
 	vertices.push_back(-50.0);
 
 

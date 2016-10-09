@@ -12,10 +12,14 @@ class Objeto3d{
 		enum TipoDibujo{
 			LINEAS, PUNTOS, AJEDREZ, NORMAL
 		};
-		void drawObjeto3d(TipoDibujo modo = NORMAL) const;
+		enum TipoPoligono{
+			FILL, LINE
+		};
+		void drawObjeto3d(TipoDibujo modo = NORMAL, TipoPoligono polygon = FILL, bool modoA=false) const;
 
 	protected:
 
+		bool modoA;
 		GLuint nver;				// Número total de vértices
 		GLuint ntri;				// Número total de triángulos
 		std::vector<GLfloat> vertices;		// Vector de Vértices
