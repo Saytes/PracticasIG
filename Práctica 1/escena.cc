@@ -4,6 +4,7 @@
 #endif
 #include <cstdio>
 #include <iostream>
+#include <string>
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "escena.h"
@@ -38,7 +39,20 @@ void Escena::inicializar(int UI_window_width,int UI_window_height) {
 // Funcion que dibuja objetos en la escena
 //***************************************************************************
 void Escena::draw_objects() {
-cubo1 -> drawObjeto3d();
+
+    switch (modoD) {
+
+        case 1:
+            cubo1 -> drawObjeto3d(Objeto3d::LINEAS);
+            break;
+        case 2:
+            cubo1 -> drawObjeto3d(Objeto3d::PUNTOS);
+            break;
+        case 3:
+            cubo1 -> drawObjeto3d(Objeto3d::NORMAL);
+            break;
+    }
+//cubo1 -> drawObjeto3d(modoD);
 }
 
 
@@ -53,9 +67,27 @@ void Escena::dibujar() {
 
 int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
 
-    std::cout << "Tecla" << Tecla1<< std::endl;
+    std::cout << "La Tecla pulsada es: " << Tecla1<< std::endl;
 	if (toupper(Tecla1)=='Q')
         return 1;
+    else if (Tecla1 == '1' || Tecla1 == '2' || Tecla1 == '3'){
+        modoD = (int)Tecla1 - 48; // Restamos 48 para sacar el valor en código ascii
+
+        switch (modoD) {
+
+            case 1:
+                mostrarM="Lineas";
+                break;
+            case 2:
+                mostrarM="Puntos";
+                break;
+            case 3:
+                mostrarM="Normal";
+                break;
+        }
+        std::cout << "Cambiado a modo " << mostrarM << std::endl;
+        return 0;
+    }
 	else return 0;
 }
 

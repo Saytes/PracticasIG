@@ -1,6 +1,7 @@
 //Archivo perteneciente a la P1 de Jorge Gutiérrez Segovia
 #ifndef _ESCENA_H
 #define _ESCENA_H
+#include <string>
 #include "ejes.h"
 #include "cubo.h"
 
@@ -27,8 +28,10 @@ private:
 	void change_projection();
 	void change_observer();
 
+// Variables para cambiar de modo y objetos
     Cubo *cubo1;
-	int modo;
+ 	int modoD;
+	std::string mostrarM="";
 
 
 public:

@@ -15,12 +15,12 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoDibujo modo) const{
         //Caso 1 el objeto es solo con líneas
         case Objeto3d::LINEAS:
             modoD = GL_LINE_STRIP;
+            break;
         //Caso 2 el objeto solo se dibuja por puntos
         case Objeto3d::PUNTOS:
             modoD = GL_POINTS;
             break;
-
-        //Como el Ajedrez y el Solido se dibujan con triangulos
+        //Como el Ajedrez y el Normal se dibujan con triangulos
         //lo pongo en el default
         default:
             modoD = GL_TRIANGLES;
