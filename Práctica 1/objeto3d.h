@@ -3,14 +3,6 @@
 #define _OBJETO3D_H
 #include<vector>
 #include<GL/gl.h>
-//Definición de variables globales
-
-const unsigned int X=0, Y=1, Z=2; // Indices de ejes
-
-typedef GLfloat Real; //Número float mínimo 32 bits
-
-typedef GLuint Natural; //Número int unsigned de mínimo 32 bits
-
 //Clase principal de la cual heredan Cubo y Tetraedro
 
 class Objeto3d{
@@ -24,10 +16,10 @@ class Objeto3d{
 
 	private:
 
-		Natural nver;				// Número total de vértices
-		Natural ntri;				// Número total de triángulos
-		std::vector<Real> vertices;		// Vector de Vértices
-		std::vector<Natural> caras;		// Vector de Caras
+		GLuint nver;				// Número total de vértices
+		GLuint ntri;				// Número total de triángulos
+		std::vector<GLfloat> vertices;		// Vector de Vértices
+		std::vector<GLuint> caras;		// Vector de Caras
 };
 
 #endif
