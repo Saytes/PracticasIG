@@ -14,7 +14,7 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoDibujo modo) const{
 
         //Caso 1 el objeto es solo con líneas
         case Objeto3d::LINEAS:
-            modoD = GL_LINES;
+            modoD = GL_LINE_STRIP;
         //Caso 2 el objeto solo se dibuja por puntos
         case Objeto3d::PUNTOS:
             modoD = GL_POINTS;
@@ -26,7 +26,7 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoDibujo modo) const{
             modoD = GL_TRIANGLES;
             break;
     }
-
+    glPointSize(5);
     /*for (int i= 0; i < caras.size(); i++){
          // Cambio de color para el ajedrez
          if (modo == AJEDREZ && i %2 == 0)
@@ -36,6 +36,6 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoDibujo modo) const{
     }*/
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer( 3, GL_FLOAT, 0, &vertices[0]);
-    glDrawElements( modoD, caras.size() , GL_UNSIGNED_INT, &caras[0]) ;
+    glDrawElements( modoD,  caras.size() , GL_UNSIGNED_INT, &caras[0]) ;
 
 }

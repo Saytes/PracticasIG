@@ -10,9 +10,9 @@ class Objeto3d{
 	public:
 		Objeto3d(); // Constructor por defecto
 		enum TipoDibujo{
-			LINEAS, PUNTOS, AJEDREZ, SOLIDO
+			LINEAS, PUNTOS, AJEDREZ, NORMAL
 		};
-		void drawObjeto3d(TipoDibujo modo = SOLIDO) const;
+		void drawObjeto3d(TipoDibujo modo = NORMAL) const;
 
 	protected:
 

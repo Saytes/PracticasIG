@@ -28,6 +28,7 @@ private:
 	void change_observer();
 
     Cubo *cubo1;
+	int modo;
 
 
 public:
