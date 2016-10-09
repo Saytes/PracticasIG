@@ -9,12 +9,15 @@
 #include "escena.h"
 
 
+
 Escena::Escena(){
     Front_plane=50;
     Back_plane=2000;
     Observer_distance = 4*Front_plane;
     Observer_angle_x = Observer_angle_y=0;
     ejes.changeAxisSize(5000);
+    cubo1= new Cubo();
+
 }
 
 void Escena::inicializar(int UI_window_width,int UI_window_height) {
@@ -35,7 +38,7 @@ void Escena::inicializar(int UI_window_width,int UI_window_height) {
 // Funcion que dibuja objetos en la escena
 //***************************************************************************
 void Escena::draw_objects() {
-
+    cubo1 -> drawObjeto3d();
 }
 
 

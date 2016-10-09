@@ -2,6 +2,7 @@
 #ifndef _ESCENA_H
 #define _ESCENA_H
 #include "ejes.h"
+#include "cubo.h"
 
 class Escena {
 private:
@@ -26,8 +27,11 @@ private:
 	void change_projection();
 	void change_observer();
 
+    Cubo *cubo1;
+
 
 public:
+
      Escena();
 	void inicializar(int UI_window_width,int UI_window_height);
 	void redimensionar(int newWidth,int newHeight) ;

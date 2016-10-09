@@ -14,7 +14,7 @@ class Objeto3d{
 		};
 		void drawObjeto3d(TipoDibujo modo = SOLIDO) const;
 
-	private:
+	protected:
 
 		GLuint nver;				// Número total de vértices
 		GLuint ntri;				// Número total de triángulos
