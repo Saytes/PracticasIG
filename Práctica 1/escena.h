@@ -4,6 +4,7 @@
 #include <string>
 #include "ejes.h"
 #include "cubo.h"
+#include "tetraedro.h"
 
 class Escena {
 private:
@@ -30,6 +31,7 @@ private:
 
 // Variables para cambiar de modo y objetos
     Cubo *cubo1;
+	Tetraedro *tetraedro1;
  	char modoD;
 	std::string mostrarM;
 

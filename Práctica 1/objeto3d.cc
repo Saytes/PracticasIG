@@ -27,7 +27,7 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoDibujo modo) const{
             break;
     }
     glPointSize(5);
-    glColor3f(0.1,0.56,1);
+    glColor3f(0,0,0);
     /*for (int i= 0; i < caras.size(); i++){
          // Cambio de color para el ajedrez
          if (modo == AJEDREZ && i %2 == 0)

@@ -18,6 +18,7 @@ Escena::Escena(){
     Observer_angle_x = Observer_angle_y=0;
     ejes.changeAxisSize(5000);
     cubo1= new Cubo();
+    tetraedro1 = new Tetraedro();
 
 }
 
@@ -42,15 +43,24 @@ void Escena::draw_objects() {
 
     switch (modoD) {
 
-        case 'L':
+        case 'A':
             cubo1 -> drawObjeto3d(Objeto3d::LINEAS);
             break;
 
-        case 'N':
-                cubo1 -> drawObjeto3d(Objeto3d::NORMAL);
-                break;
+        case 'S':
+            cubo1 -> drawObjeto3d(Objeto3d::NORMAL);
+            break;
+
         case 'P':
                 cubo1 -> drawObjeto3d(Objeto3d::PUNTOS);
+                break;
+
+        case 'C':
+                cubo1 -> drawObjeto3d(Objeto3d::NORMAL);
+                break;
+
+        case 'T':
+                tetraedro1 -> drawObjeto3d(Objeto3d::LINEAS);
                 break;
         }
 //cubo1 -> drawObjeto3d(modoD);
@@ -74,21 +84,26 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
         std::cout << "La acción es salir."<< std::endl;
         return 1;
     }
-    else if (toupper(Tecla1)=='L' || toupper(Tecla1)=='l' || toupper(Tecla1)=='P'
-            || toupper(Tecla1)=='p' || toupper(Tecla1)=='N' || toupper(Tecla1)=='n' ){
+    else if (toupper(Tecla1)=='A' || toupper(Tecla1)=='a' || toupper(Tecla1)=='P'
+            || toupper(Tecla1)=='p' || toupper(Tecla1)=='S' || toupper(Tecla1)=='s'
+            || toupper(Tecla1)=='T' || toupper(Tecla1=='t')){
 
             modoD = toupper(Tecla1); // Restamos 48 para sacar el valor en código ascii
 
             switch (modoD) {
 
-                case 'L':
-                    mostrarM="Lineas";
+                case 'A':
+                    mostrarM="Alambre";
                     break;
                 case 'P':
                     mostrarM="Puntos";
                     break;
-                case 'N':
-                    mostrarM="Normal";
+                case 'S':
+                    mostrarM="Sólido";
+                    break;
+
+                case 'T':
+                    mostrarM="Tetraedro";
                     break;
 
             }
