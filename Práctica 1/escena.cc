@@ -55,7 +55,7 @@ void Escena::draw_objects() {
             break;
 
         case 'X':
-            objeto3d -> drawObjeto3d(Objeto3d::PUNTOS,Objeto3d::FILL,ajedrez);
+            objeto3d -> drawObjeto3d(Objeto3d::NORMAL,Objeto3d::FILL,ajedrez);
             break;
 
         case 'C':

@@ -49,12 +49,13 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoDibujo modo,Objeto3d::TipoPoligono pol
     }
     else{
         //Modo ajedrez
+        glColor3f(0,1,1);
         glEnableClientState(GL_VERTEX_ARRAY);
         glVertexPointer( 3, GL_FLOAT, 0, &vertices[0]);
         glEnable(GL_CULL_FACE);
         glPolygonMode(GL_FRONT_AND_BACK, modoP);
         glDrawElements( modoD,  caras.size()/2 , GL_UNSIGNED_INT, &caras[0]) ;
-        glColor3f(1,1,0);
+        glColor3f(1, 1, 0);
         glDrawElements( modoD,  caras.size()/2 , GL_UNSIGNED_INT, &caras[caras.size()/2]) ;
     }
 
