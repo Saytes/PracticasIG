@@ -25,18 +25,6 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoPoligono polygon,bool modoA) const{
 
     }
     glPointSize(5);
-    /*float ncolor = 0.0;
-    std::vector<float>colores2;
-    std::vector<float>colores1;
-    for(int i=0; i<vertices.size();i+=3){
-            colores1.push_back(1.0);
-            colores1.push_back(0.0);
-            colores1.push_back(0.0);
-            colores2.push_back(0.0);
-            colores2.push_back(1.0);
-            colores2.push_back(1.0);
-
-    }*/
 
     if(!modoA){
         glEnableClientState(GL_VERTEX_ARRAY);
