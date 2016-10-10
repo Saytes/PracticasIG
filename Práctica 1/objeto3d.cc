@@ -1,4 +1,4 @@
-//Archivo perteneciente a la P1 de Jorge Gutiérrez Segovia
+//Archivo perteneciente a la P1 de Jorge Gutiérrez Segovia grupo C1
 
 #include<iostream>
 #include<objeto3d.h>
