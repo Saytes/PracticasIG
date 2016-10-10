@@ -35,7 +35,6 @@ Tetraedro::Tetraedro(){
             color2.push_back(1.0);
             color2.push_back(1.0);
             color2.push_back(0.0);
-
     }
 
     // Caras
