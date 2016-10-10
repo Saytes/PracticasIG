@@ -43,26 +43,26 @@ void Escena::draw_objects() {
     switch (modo) {
 
         case 'A':
-            objeto3d -> drawObjeto3d(Objeto3d::LINEAS,Objeto3d::LINE,ajedrez);
+            objeto3d -> drawObjeto3d(Objeto3d::LINE,ajedrez);
             break;
 
         case 'S':
-            objeto3d -> drawObjeto3d(Objeto3d::NORMAL,Objeto3d::FILL,ajedrez);
+            objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
             break;
 
         case 'P':
-            objeto3d -> drawObjeto3d(Objeto3d::PUNTOS,Objeto3d::FILL,ajedrez);
+            objeto3d -> drawObjeto3d(Objeto3d::POINTS,ajedrez);
             break;
 
         case 'X'://Modo Ajedrez
-            objeto3d -> drawObjeto3d(Objeto3d::AJEDREZ,Objeto3d::FILL,ajedrez);
+            objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
             break;
 
         case 'C':
-            objeto3d -> drawObjeto3d(Objeto3d::LINEAS,Objeto3d::FILL,ajedrez);
+            objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
             break;
         case 'T':
-            objeto3d -> drawObjeto3d(Objeto3d::LINEAS,Objeto3d::FILL,ajedrez);
+            objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
             break;
 
         }

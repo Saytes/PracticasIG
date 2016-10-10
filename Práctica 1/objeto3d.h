@@ -9,13 +9,10 @@ class Objeto3d{
 
 	public:
 		Objeto3d(); // Constructor por defecto
-		enum TipoDibujo{
-			LINEAS, PUNTOS, AJEDREZ, NORMAL
-		};
 		enum TipoPoligono{
-			FILL, LINE
+			FILL, LINE, POINTS
 		};
-		void drawObjeto3d(TipoDibujo modo = NORMAL, TipoPoligono polygon = FILL, bool modoA=false) const;
+		void drawObjeto3d(TipoPoligono polygon = FILL, bool modoA=false) const;
 
 	protected:
 
@@ -23,6 +20,9 @@ class Objeto3d{
 		GLuint nver;				// Número total de vértices
 		GLuint ntri;				// Número total de triángulos
 		std::vector<GLfloat> vertices;		// Vector de Vértices
+		std::vector<GLfloat> colors;		// Vector de Vértices
+		std::vector<GLfloat> color1;		// Vector de Vértices
+		std::vector<GLfloat> color2;		// Vector de Vértices
 		std::vector<GLuint> caras;		// Vector de Caras
 };
 
