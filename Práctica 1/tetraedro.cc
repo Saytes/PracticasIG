@@ -5,22 +5,22 @@ Tetraedro::Tetraedro(){
 
 	// Vertices
 
-    //Abajo derecha
+    //Abajo derecha(0)
     vertices.push_back(-50.0);
     vertices.push_back(-50.0);
 	vertices.push_back(50.0);
 	//----------------
-    //Abajo izq
+    //Abajo izq(1)
 	vertices.push_back(50.0);
 	vertices.push_back(-50.0);
 	vertices.push_back(-50.0);
 	//----------------
-    //Origen
+    //Origen(2)
 	vertices.push_back(50.0);
 	vertices.push_back(50.0);
 	vertices.push_back(50.0);
 	//----------------
-    //Vertice de arriba(v4)
+    //Vertice de arriba(3)
 	vertices.push_back(-50.0);
 	vertices.push_back(50.0);
 	vertices.push_back(-50.0);
@@ -39,20 +39,24 @@ Tetraedro::Tetraedro(){
     }
 
     // Caras
-    caras.push_back(1);
+    //Base
     caras.push_back(0);
-    caras.push_back(2);
-    //----------------
-    caras.push_back(3);
     caras.push_back(1);
     caras.push_back(2);
     //----------------
-    caras.push_back(0);
-    caras.push_back(1);
-    caras.push_back(3);
-    //----------------
-    caras.push_back(0);
+    //Lateral derecho
     caras.push_back(3);
     caras.push_back(2);
+    caras.push_back(1);
+    //----------------
+    //Cara frontal
+    caras.push_back(3);
+    caras.push_back(1);
+    caras.push_back(0);
+    //----------------
+    //Lateral izquierdo
+    caras.push_back(0);
+    caras.push_back(2);
+    caras.push_back(3);
 	//----------------
 }
