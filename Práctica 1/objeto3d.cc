@@ -41,6 +41,7 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoPoligono polygon,bool modoA) const{
     if(!modoA){
         glEnableClientState(GL_VERTEX_ARRAY);
         glVertexPointer( 3, GL_FLOAT, 0, &vertices[0]);
+        glEnable(GL_CULL_FACE);
         glPolygonMode(GL_FRONT_AND_BACK, modoP);
         glEnableClientState(GL_COLOR_ARRAY);
         glColorPointer(3, GL_FLOAT, 0, &colors[0]);
@@ -51,6 +52,7 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoPoligono polygon,bool modoA) const{
 
         glEnableClientState(GL_VERTEX_ARRAY);
         glVertexPointer( 3, GL_FLOAT, 0, &vertices[0]);
+        glEnable(GL_CULL_FACE);
         glPolygonMode(GL_FRONT_AND_BACK, modoP);
 
         //Primera parte del objeto
