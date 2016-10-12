@@ -4,37 +4,37 @@
 Cubo::Cubo(){
 
 	// Vertice
-	vertices.push_back(0.0);
-    vertices.push_back(0.0);
+	vertices.push_back(5.0);
+    vertices.push_back(5.0);
 	vertices.push_back(75.0);
     //------------------------
     vertices.push_back(75.0);
-    vertices.push_back(0.0);
+    vertices.push_back(5.0);
     vertices.push_back(75.0);
     //------------------------
-    vertices.push_back(0.0);
-    vertices.push_back(75.0);
-    vertices.push_back(75.0);
-    //------------------------
-    vertices.push_back(75.0);
+    vertices.push_back(5.0);
     vertices.push_back(75.0);
     vertices.push_back(75.0);
     //------------------------
-    vertices.push_back(0.0);
-    vertices.push_back(0.0);
-    vertices.push_back(0.0);
+    vertices.push_back(75.0);
+    vertices.push_back(75.0);
+    vertices.push_back(75.0);
+    //------------------------
+    vertices.push_back(5.0);
+    vertices.push_back(5.0);
+    vertices.push_back(5.0);
     //------------------------
     vertices.push_back(75.0);
-    vertices.push_back(0.0);
-    vertices.push_back(0.0);
+    vertices.push_back(5.0);
+    vertices.push_back(5.0);
     //------------------------
-    vertices.push_back(0.0);
+    vertices.push_back(5.0);
     vertices.push_back(75.0);
-    vertices.push_back(0.0);
+    vertices.push_back(5.0);
     //------------------------
     vertices.push_back(75.0);
     vertices.push_back(75.0);
-    vertices.push_back(0.0);
+    vertices.push_back(5.0);
 
 	for(int i=0; i<vertices.size();i+=3){
 			colors.push_back(0.0);
