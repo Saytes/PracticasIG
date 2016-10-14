@@ -1,0 +1,18 @@
+Práctica realizada por Jorge Gutiérrez Segovia, alumno del grupo C1.
+
+Instrucciones de compilación:
+-Entrar en la carpeta Práctica 1 desde el terminal.
+-Ejecutar Make.
+
+Instrucciones de ejecución:
+-  ./practica1 para ejecutar el programa
+- Una vez dentro{
+    -Modo cubo : Tecla C
+    -Modo tetraedro : Tecla T
+}
+
+- Una vez estando en modo cubo / tetraedro{
+    -Modo Alambre: Tecla A
+    -Modo Sólido: Tecla S
+    -Modo Ajedrez: Tecla X
+}
