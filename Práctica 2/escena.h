@@ -1,4 +1,4 @@
-//Archivo perteneciente a la P1 de Jorge Gutiérrez Segovia grupo C1
+//Archivo perteneciente a la P2 de Jorge Gutiérrez Segovia grupo C1
 #ifndef _ESCENA_H
 #define _ESCENA_H
 #include <string>
