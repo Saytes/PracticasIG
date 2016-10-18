@@ -1,0 +1,10 @@
+			//Trigonometria para rotar un punto con respecto a un eje una serie de veces, y todos esos puntod que genearmos tenemos que conectarlos con otros para formar caras en sentido antihorario
+		//El numero de giros tiene que ser posible indicarlo iterativamente(m�nimo 3).
+	// O el perfil nos lo dan por PLY o nos lo dan en un vector de floats. CASOS A CONTROLAR:
+	//Que ning�n punto, ni superior , ni inferior caiga en el eje de rotaci�n.(si se da no revolucionarlo) y luego los puntos que nos den conectarlos con este para generar una tapa.
+	//(en medio si se podr�an revolucionar, los unicos que no ser�n los que no tengan ning�n punto encima)
+	//Controlar las tapas superior e inferior y decir si se quieren mostrar(quitar el punto que est� en el eje).
+	//PUNTO EXTRA:
+		//En vez de rotar puntos, rotar fijuras completas(perfil cerrado)
+		//Centrar los objetos cargados por ply.(Caja envolvente(AABB)) - Calculamos el punto medio del bojeto y lo ponemos en el origen,
+		//y lo mismo con las dimensiones, cambiando longitud, es decir, sacando la longitud m�ximma y y diviendo la que nosotros que queremos entre esta y despues multiplicando todos los v�rtices por esa.
