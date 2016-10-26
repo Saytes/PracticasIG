@@ -9,8 +9,6 @@
 #include <GL/glut.h>
 #include "escena.h"
 
-
-
 Escena::Escena(){
     Front_plane=50;
     Back_plane=2000;
@@ -32,6 +30,7 @@ void Escena::inicializar(int UI_window_width,int UI_window_height) {
 	Height=UI_window_height/10;
 	glViewport(0,0,UI_window_width,UI_window_height);
 
+
 }
 
 
@@ -39,6 +38,15 @@ void Escena::inicializar(int UI_window_width,int UI_window_height) {
 // Funcion que dibuja objetos en la escena
 //***************************************************************************
 void Escena::draw_objects() {
+
+    if(mostrarM=="PLY"){
+        std::cout<<"Introduzca la direccion del fichero PLY" <<std::endl;
+        std::getline(cin,directPLY);
+        std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
+        objeto3d = new ObjetoPLY(&d[0]);
+        mostrarM="";
+        modo = 'S';
+    }
 
     switch (modo) {
 
@@ -61,12 +69,11 @@ void Escena::draw_objects() {
         case 'C':
             objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
             break;
+
         case 'T':
             objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
             break;
-
         }
-
 }
 
 
@@ -88,8 +95,8 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
 
         return 1;
     }
-    else if (toupper(Tecla1)=='A' | toupper(Tecla1)=='P' || toupper(Tecla1)=='S'
-            || toupper(Tecla1)=='T'|| toupper(Tecla1)=='C' || toupper(Tecla1)=='X'){
+    else if (toupper(Tecla1)=='A' || toupper(Tecla1)=='P' || toupper(Tecla1)=='S'
+            || toupper(Tecla1)=='T'|| toupper(Tecla1)=='C' || toupper(Tecla1)=='X'|| toupper(Tecla1)=='M'){
 
             modo = toupper(Tecla1); // Restamos 48 para sacar el valor en código ascii
 
@@ -122,6 +129,11 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                     ajedrez=false;
                     mostrarM="Cubo";
                     break;
+
+                case 'M':
+                    mostrarM = "PLY";
+                    break;
+
             }
             std::cout << "Cambiado a modo " << mostrarM << std::endl;
             return 0;

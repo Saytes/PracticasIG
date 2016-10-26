@@ -5,6 +5,17 @@
 #include<GL/gl.h>
 //Clase principal de la cual heredan Cubo y Tetraedro
 
+
+struct Vertice{
+
+    GLfloat x,y,z;
+};
+
+struct Cara{
+
+    GLuint v0,v1,v2;
+};
+
 class Objeto3d{
 
 	public:
@@ -19,11 +30,11 @@ class Objeto3d{
 		bool modoA;
 		GLuint nver;				// Número total de vértices
 		GLuint ntri;				// Número total de triángulos
-		std::vector<GLfloat> vertices;		// Vector de Vértices
-		std::vector<GLfloat> colors;		// Vector de Vértices
-		std::vector<GLfloat> color1;		// Vector de Vértices
-		std::vector<GLfloat> color2;		// Vector de Vértices
-		std::vector<GLuint> caras;		// Vector de Caras
+		std::vector<Vertice> vertices;		// Vector de Vértices
+		std::vector<Vertice> colors;		// Vector de Vértices
+		std::vector<Vertice> color1;		// Vector de Vértices
+		std::vector<Vertice> color2;		// Vector de Vértices
+		std::vector<Cara> caras;		// Vector de Caras
 };
 
 #endif

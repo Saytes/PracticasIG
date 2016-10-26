@@ -4,6 +4,7 @@
 #include <string>
 #include "ejes.h"
 #include "cubo.h"
+#include "objetoPLY.h"
 #include "tetraedro.h"
 
 class Escena {
@@ -34,8 +35,8 @@ private:
 	char modo;
 	bool ajedrez;
 	std::string mostrarM;
-
-
+  std::string directPLY;
+  char* d;
 public:
 
      Escena();

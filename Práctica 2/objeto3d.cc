@@ -1,7 +1,7 @@
 //Archivo perteneciente a la P2 de Jorge Gutiérrez Segovia grupo C1
 
 #include<iostream>
-#include<objeto3d.h>
+#include"objeto3d.h"
 
 Objeto3d::Objeto3d(){
 
@@ -33,7 +33,7 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoPoligono polygon,bool modoA) const{
         glPolygonMode(GL_FRONT_AND_BACK, modoP);
         glEnableClientState(GL_COLOR_ARRAY);
         glColorPointer(3, GL_FLOAT, 0, &colors[0]);
-        glDrawElements( GL_TRIANGLES,  caras.size() , GL_UNSIGNED_INT, &caras[0]) ;
+        glDrawElements( GL_TRIANGLES,  caras.size()*3 , GL_UNSIGNED_INT, &caras[0]) ;
     }
     else{
         //Modo ajedrez
@@ -46,12 +46,12 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoPoligono polygon,bool modoA) const{
         //Primera parte del objeto
         glEnableClientState(GL_COLOR_ARRAY);
         glColorPointer(3, GL_FLOAT, 0, &color1[0]);
-        glDrawElements( GL_TRIANGLES,  caras.size()/2 , GL_UNSIGNED_INT, &caras[0]) ;
+        glDrawElements( GL_TRIANGLES,  caras.size()/2*3 , GL_UNSIGNED_INT, &caras[0]) ;
 
         //Segunda parte del objeto
         glEnableClientState(GL_COLOR_ARRAY);
         glColorPointer(3, GL_FLOAT, 0, &color2[0]);
-        glDrawElements( GL_TRIANGLES,  caras.size()/2 , GL_UNSIGNED_INT, &caras[caras.size()/2]) ;
+        glDrawElements( GL_TRIANGLES,  caras.size()/2*3 , GL_UNSIGNED_INT, &caras[caras.size()/2]) ;
     }
 
 
