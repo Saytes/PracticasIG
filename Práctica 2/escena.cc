@@ -16,6 +16,7 @@ Escena::Escena(){
     Observer_angle_x = Observer_angle_y=0;
     ejes.changeAxisSize(5000);
     objeto3d = new Objeto3d();
+    objetoRotado = new ObjRotacion();
     ajedrez=false;
 }
 
@@ -47,6 +48,43 @@ void Escena::draw_objects() {
         mostrarM="";
         modo = 'S';
     }
+    if(mostrarM=="PLYR"){
+      directPLY="peon.ply";
+      std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
+      objeto3d = new ObjetoPLY(&d[0]);
+      aRotar = objeto3d -> getVertices();
+      objetoRotado -> generaRotacion( aRotar , 3, false,false);
+      mostrarM="";
+    }
+    else if(mostrarM=="Rotacion"){
+
+    	std::cout<<modo<<std::endl;
+      v1.x = 10.0;
+      v1.y = 0.0;
+      v1.z = 0.0;
+      aRotar.push_back(v1);
+      v1.x = 10.0;
+      v1.y = 10.0;
+      v1.z = 0.0;
+      aRotar.push_back(v1);
+
+      objetoRotado -> generaRotacion( aRotar, 4, false,false);
+      std::vector<Vertice> v = objetoRotado -> getVertices();
+      std::vector<Cara> c = objetoRotado -> getCaras();
+
+      std::cout<<v.size() <<" Tamaño v\n";
+
+      std::cout<<c.size()<< "tamaño c\n";
+
+      for(int i=0 ; i<v.size();i++){
+        std::cout<< v[i].x<< " x "<< v[i].y<< " y "<< v[i].z << " z\n";
+      }
+      for(unsigned int i=0 ; i<c.size();i++){
+        std::cout<< c[i].v0<< " v0 "<< c[i].v1<< " v1 "<< c[i].v2 << "v2\n";
+      }
+      mostrarM="";
+    }
+
 
     switch (modo) {
 
@@ -73,6 +111,24 @@ void Escena::draw_objects() {
         case 'T':
             objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
             break;
+
+        case 'R':
+            objeto3d -> drawObjeto3d(Objeto3d::FILL, ajedrez);
+            break;
+
+        case 'W':
+            objetoRotado-> drawObjeto3d(Objeto3d::FILL, ajedrez);
+            break;
+
+        case '+':
+            objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
+            break;
+
+        case '-':
+            objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
+            break;
+
+
         }
 }
 
@@ -96,9 +152,10 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
         return 1;
     }
     else if (toupper(Tecla1)=='A' || toupper(Tecla1)=='P' || toupper(Tecla1)=='S'
-            || toupper(Tecla1)=='T'|| toupper(Tecla1)=='C' || toupper(Tecla1)=='X'|| toupper(Tecla1)=='M'){
+            || toupper(Tecla1)=='T'|| toupper(Tecla1)=='C' || toupper(Tecla1)=='X'|| toupper(Tecla1)=='M' || toupper(Tecla1)=='R' || toupper(Tecla1)== '+'
+            || toupper(Tecla1)== '-'|| toupper(Tecla1)=='W'){
 
-            modo = toupper(Tecla1); // Restamos 48 para sacar el valor en código ascii
+            modo = toupper(Tecla1);
 
             switch (modo) {
 
@@ -133,6 +190,25 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                 case 'M':
                     mostrarM = "PLY";
                     break;
+
+                case 'R':
+                    mostrarM="PLYR";
+                    break;
+
+                case '+':
+                    objeto3d -> ampliarVertices();
+                    objetoRotado -> ampliarVertices();
+                    break;
+
+                case '-':
+                    objeto3d -> reducirVertices();
+                    objetoRotado -> reducirVertices();
+                    break;
+
+                case 'W':
+                ajedrez = false;
+                mostrarM="Rotacion";
+                break;
 
             }
             std::cout << "Cambiado a modo " << mostrarM << std::endl;

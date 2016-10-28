@@ -3,15 +3,16 @@
 #define _OBJROTACION_H
 #include<vector>
 #include<GL/gl.h>
-#include "objeto3d.h"
+#include"objeto3d.h"
+#include <math.h>
 
-class ObjRotacion : Objeto3d{
+class ObjRotacion : public Objeto3d{
 
 	public:
 
 	    ObjRotacion();
-	    void generaRotacion(std::vector<GLfloat> perfil, int it);
-		std::vector<GLfloat> rotar(std::vector<GLfloat> vertice, float ang);
+			void generaRotacion(std::vector<Vertice> aRotar, int iteraciones, bool tapaS, bool tapaI);
+		  Vertice rotarPunto(Vertice v, float ang);
 
 	protected:
 };

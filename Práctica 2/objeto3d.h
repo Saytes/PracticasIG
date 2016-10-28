@@ -24,6 +24,11 @@ class Objeto3d{
 			FILL, LINE, POINTS
 		};
 		void drawObjeto3d(TipoPoligono polygon = FILL, bool modoA=false) const;
+    std::vector<Vertice> getVertices();
+    void ampliarVertices();
+    void reducirVertices();
+    void generaRotacion(std::vector<Vertice> aRotar, int iteraciones, bool tapaS, bool tapaI);
+    std::vector<Cara> getCaras();
 
 	protected:
 

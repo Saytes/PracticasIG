@@ -5,6 +5,7 @@
 #include "ejes.h"
 #include "cubo.h"
 #include "objetoPLY.h"
+#include "objetoRota.h"
 #include "tetraedro.h"
 
 class Escena {
@@ -32,11 +33,14 @@ private:
 
 // Variables para cambiar de modo y objetos
  	Objeto3d *objeto3d;
+	ObjRotacion *objetoRotado;
 	char modo;
 	bool ajedrez;
 	std::string mostrarM;
   std::string directPLY;
+	std::vector<Vertice> aRotar;
   char* d;
+  Vertice v1;
 public:
 
      Escena();
