@@ -79,10 +79,10 @@ void Escena::draw_objects() {
       v1.y = 50.0;
       v1.z = 0.0;
       aRotar.push_back(v1);
-      v1.x = 50.0;
+    /*  v1.x = 50.0;
       v1.y = 0.0;
       v1.z = 0.0;
-      aRotar.push_back(v1);
+      aRotar.push_back(v1);*/
       v1.x = 50.0;
       v1.y = -50.0;
       v1.z = 0.0;
