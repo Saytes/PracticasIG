@@ -10,8 +10,8 @@ void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, b
     bool salir = false;
     Vertice pTapaSup, pTapaInf; //Punto de la tapa superior y tapa inferior
 
-/*
 
+/*
     if(aRotar[0].x == 0.0){ // Hay tapa inferior.
 
         //Tras comprobar si hay tapa inferior, la introduzco en el vértice
@@ -100,9 +100,9 @@ void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, b
 
         caras.push_back(c);
 
-      ///Introduzco la segunda "Media Cara"
+        //Introduzco la segunda "Media Cara"
         c.v0 = i-1;
-        c.v1 = (indiceVertice - aRotar.size());
+        c.v1 = (indiceVertice - aRotar.size()) + i-1;
         c.v2 = (indiceVertice - aRotar.size()) + i;
         caras.push_back(c);
     }

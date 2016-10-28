@@ -45,11 +45,11 @@ void Escena::inicializar(int UI_window_width,int UI_window_height) {
 void Escena::draw_objects() {
 
     if(mostrarM=="PLY"){
-        std::cout<<"Introduzca la direccion del fichero PLY" <<std::endl;
-        std::getline(cin,directPLY);
+
         std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
         objeto3d = new ObjetoPLY(&d[0]);
         mostrarM="";
+        //Modo por defecto = C
         modo = 'C';
     }
     else if(mostrarM=="PLYR"){
@@ -58,12 +58,14 @@ void Escena::draw_objects() {
         std::cin >> c;
         iteraciones = atoi(c.c_str());
       } while(iteraciones<3);
-      directPLY="peon.ply";
+      std::cout<<"Introduzca la direccion del fichero PLY" <<std::endl;
+      std::getline(cin,directPLY);
       std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
       objeto3d = new ObjetoPLY(&d[0]);
       aRotar = objeto3d -> getVertices();
       objetoRotado -> generaRotacion( aRotar,iteraciones, tapaS,tapaI);
       mostrarM= "" ;
+      //Modo por defecto = C
       modo = 'C';
     }
     else if(mostrarM=="Rotacion"){
@@ -73,12 +75,6 @@ void Escena::draw_objects() {
         std::cin >> c;
         iteraciones = atoi(c.c_str());
       } while(iteraciones<3);
-
-    	std::cout<<modo<<std::endl;
-      /*v1.x=0.0;
-      v1.y=0.0;
-      v1.z=0.0;
-      aRotar.push_back(v1);*/
       v1.x = 50.0;
       v1.y = 50.0;
       v1.z = 0.0;
@@ -94,10 +90,12 @@ void Escena::draw_objects() {
       objeto3d -> generaRotacion( aRotar, iteraciones, tapaS,tapaI);
 
       mostrarM="";
+      //Modo por defecto = C
       modo = 'C';
     }else if (mostrarM=="Tapa inferior" || mostrarM=="Tapa superior") {
 
       objeto3d -> generaRotacion( aRotar, iteraciones, tapaS,tapaI);
+      //Modo por defecto = C
       modo = 'C';
       mostrarM="";
     }
@@ -127,6 +125,7 @@ void Escena::draw_objects() {
             break;
 
         case 'C':
+            //Modo por defecto = C
             objeto3d -> drawObjeto3d(polygon,ajedrez);
             break;
 
