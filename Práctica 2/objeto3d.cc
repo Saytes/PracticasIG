@@ -1,6 +1,7 @@
 //Archivo perteneciente a la P2 de Jorge Gutiérrez Segovia grupo C1
 
 #include<iostream>
+#include <string>
 #include"objeto3d.h"
 
 Objeto3d::Objeto3d(){
@@ -88,6 +89,5 @@ void Objeto3d::reducirVertices(){
     std::cout<< "Reducido\n";
 }
 
-void Objeto3d::generaRotacion(std::vector<Vertice> aRotar, bool tapaS, bool tapaI){
-    std::cout<< "Ampliado\n";
+void Objeto3d::generaRotacion(std::vector<Vertice> aRotar,int iteraciones, bool tapaS, bool tapaI){
 }

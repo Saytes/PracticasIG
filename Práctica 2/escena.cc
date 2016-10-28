@@ -18,8 +18,9 @@ Escena::Escena(){
     objeto3d = new Objeto3d();
     objetoRotado = new Objeto3d();
     ajedrez=false;
-    bool tapaS = false;
-    bool tapaI = false;
+    tapaS = false;
+    tapaI = false;
+    iteraciones = 3;
   	Objeto3d::TipoPoligono polygon = Objeto3d::FILL;
 }
 
@@ -52,42 +53,53 @@ void Escena::draw_objects() {
         modo = 'C';
     }
     else if(mostrarM=="PLYR"){
+      do {
+        std::cout << "Introduzca el numero de iteraciones: ";
+        std::cin >> c;
+        iteraciones = atoi(c.c_str());
+      } while(iteraciones<3);
       directPLY="peon.ply";
       std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
       objeto3d = new ObjetoPLY(&d[0]);
       aRotar = objeto3d -> getVertices();
-      objetoRotado -> generaRotacion( aRotar, tapaS,tapaI);
+      objetoRotado -> generaRotacion( aRotar,iteraciones, tapaS,tapaI);
       mostrarM= "" ;
       modo = 'C';
     }
     else if(mostrarM=="Rotacion"){
 
+      do {
+        std::cout << "Introduzca el numero de iteraciones: ";
+        std::cin >> c;
+        iteraciones = atoi(c.c_str());
+      } while(iteraciones<3);
+
     	std::cout<<modo<<std::endl;
-      v1.x = 10.0;
+      /*v1.x=0.0;
+      v1.y=0.0;
+      v1.z=0.0;
+      aRotar.push_back(v1);*/
+      v1.x = 50.0;
+      v1.y = 50.0;
+      v1.z = 0.0;
+      aRotar.push_back(v1);
+      v1.x = 50.0;
       v1.y = 0.0;
       v1.z = 0.0;
       aRotar.push_back(v1);
-      v1.x = 10.0;
-      v1.y = 10.0;
+      v1.x = 50.0;
+      v1.y = -50.0;
       v1.z = 0.0;
       aRotar.push_back(v1);
+      objeto3d -> generaRotacion( aRotar, iteraciones, tapaS,tapaI);
 
-      objeto3d -> generaRotacion( aRotar, tapaS,tapaI);
-      std::vector<Vertice> v = objeto3d -> getVertices();
-      std::vector<Cara> c = objeto3d -> getCaras();
-
-      std::cout<<v.size() <<" Tamaño v\n";
-
-      std::cout<<c.size()<< "tamaño c\n";
-
-      for(int i=0 ; i<v.size();i++){
-        std::cout<< v[i].x<< " x "<< v[i].y<< " y "<< v[i].z << " z\n";
-      }
-      for(unsigned int i=0 ; i<c.size();i++){
-        std::cout<< c[i].v0<< " v0 "<< c[i].v1<< " v1 "<< c[i].v2 << "v2\n";
-      }
       mostrarM="";
       modo = 'C';
+    }else if (mostrarM=="Tapa inferior" || mostrarM=="Tapa superior") {
+
+      objeto3d -> generaRotacion( aRotar, iteraciones, tapaS,tapaI);
+      modo = 'C';
+      mostrarM="";
     }
 
 
@@ -107,7 +119,7 @@ void Escena::draw_objects() {
             polygon = Objeto3d::POINTS;
             objeto3d -> drawObjeto3d(polygon,ajedrez);
             break;
-            
+
         //Modo Ajedrez
         case 'X':
             polygon = Objeto3d::FILL;

@@ -2,6 +2,7 @@
 #ifndef _ESCENA_H
 #define _ESCENA_H
 #include <string>
+#include <stdlib.h>
 #include "ejes.h"
 #include "cubo.h"
 #include "objetoPLY.h"
@@ -42,7 +43,9 @@ private:
   char* d;
 	bool tapaS;
 	bool tapaI;
-  Vertice v1;
+	int iteraciones;
+  std::string c;
+	Vertice v1;
 public:
 
      Escena();

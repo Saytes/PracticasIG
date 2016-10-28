@@ -28,7 +28,7 @@ class Objeto3d{
     std::vector<Cara> getCaras();
     void ampliarVertices();
     void reducirVertices();
-    virtual void generaRotacion(std::vector<Vertice> aRotar, bool tapaS, bool tapaI);
+    virtual void generaRotacion(std::vector<Vertice> aRotar, int iteraciones,bool tapaS, bool tapaI);
 
 	protected:
 
