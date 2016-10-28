@@ -25,10 +25,10 @@ class Objeto3d{
 		};
 		void drawObjeto3d(TipoPoligono polygon = FILL, bool modoA=false) const;
     std::vector<Vertice> getVertices();
+    std::vector<Cara> getCaras();
     void ampliarVertices();
     void reducirVertices();
-    void generaRotacion(std::vector<Vertice> aRotar, int iteraciones, bool tapaS, bool tapaI);
-    std::vector<Cara> getCaras();
+    virtual void generaRotacion(std::vector<Vertice> aRotar, bool tapaS, bool tapaI);
 
 	protected:
 

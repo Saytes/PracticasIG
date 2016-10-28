@@ -87,6 +87,7 @@ void Objeto3d::reducirVertices(){
 
     std::cout<< "Reducido\n";
 }
-/*  void Objeto3d::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, bool tapaS, bool tapaI){
+
+void Objeto3d::generaRotacion(std::vector<Vertice> aRotar, bool tapaS, bool tapaI){
     std::cout<< "Ampliado\n";
-}*/
+}

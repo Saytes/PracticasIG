@@ -32,14 +32,16 @@ private:
 	void change_observer();
 
 // Variables para cambiar de modo y objetos
- 	Objeto3d *objeto3d;
-	ObjRotacion *objetoRotado;
+ 	Objeto3d *objeto3d, *objetoRotado;
+	Objeto3d::TipoPoligono polygon;
 	char modo;
 	bool ajedrez;
 	std::string mostrarM;
   std::string directPLY;
 	std::vector<Vertice> aRotar;
   char* d;
+	bool tapaS;
+	bool tapaI;
   Vertice v1;
 public:
 

@@ -6,12 +6,18 @@
 ObjRotacion::ObjRotacion(){};
 
 
-void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, bool tapaS, bool tapaI){
+void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar,  bool tapaS, bool tapaI){
 
 
-    //Vertice pTapaSup, pTapaInf; //Punto de la tapa superior y tapa inferior
+    Vertice pTapaSup, pTapaInf; //Punto de la tapa superior y tapa inferior
+    int iteraciones=0;
+    do {
+      std::cout << "Introduzca el numero de iteraciones: ";
+      std::cin >> iteraciones;
+    } while(iteraciones<3);
 
-    /*if(aRotar[0].x == 0.0){
+
+    if(aRotar[0].x == 0.0){
 
         //Tras comprobar si hay tapa superior, la introduzco en el vértice
         //creado antes y lo borro del vector de puntos a rotar
@@ -44,7 +50,7 @@ void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, b
         pTapaInf.y = aRotar[aRotar.size()-1].y;
         pTapaInf.z = aRotar[aRotar.size()-1].z;
     }
-    */
+
 
     float anguloRotacion = (2.0*3.1415)/(iteraciones*1.0); //Genero ángulo en radianes
 
@@ -56,7 +62,7 @@ void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, b
 
     //Redimensiono mi vector, para poder acceder a posiciones independientemente
     vertices.resize(aRotar.size()*(iteraciones));
-    caras.clear();
+  //  caras.clear();
 
     for(int i=0; i<iteraciones-1; i++){
 
@@ -86,25 +92,27 @@ void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, b
             indiceVertice++;
         }
     }
-    for(unsigned int j=1; j < aRotar.size();j++){
+
+    //Unir las últimas caras con las primeras
+      for(unsigned int i=1; i < aRotar.size() ; i++){
 
         //Introduzco la primera "Media Cara"
         Cara c;
-        c.v0 = indiceVertice;
-        c.v1 = indiceVertice-aRotar.size();
-        c.v2 = indiceVertice-1;
+        c.v0 = vertices.size()-(aRotar.size());
+        c.v1 = i%1;
+        c.v2 = vertices.size()+i-(aRotar.size());
 
         caras.push_back(c);
 
-        //Introduzco la segunda "Media Cara"
-        c.v0 = indiceVertice-aRotar.size();
-        c.v1 = indiceVertice-aRotar.size()-1;
-        c.v2 = indiceVertice-1;
+      ///Introduzco la segunda "Media Cara"
+        c.v0 = i;
+        c.v1 = vertices.size()+i-(aRotar.size());
+        c.v2 = i%1;
 
         caras.push_back(c);
-        indiceVertice++;
     }
-/*
+
+    // Uno las tapas
     if(tapaS == true){
 
         vertices.push_back(pTapaSup);
@@ -132,7 +140,7 @@ void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, b
 
             caras.push_back(c);
         }
-    }*/
+    }
 
     for(unsigned int i=0; i<vertices.size();i++){
 				Vertice vc;

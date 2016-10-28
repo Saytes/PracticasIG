@@ -16,8 +16,11 @@ Escena::Escena(){
     Observer_angle_x = Observer_angle_y=0;
     ejes.changeAxisSize(5000);
     objeto3d = new Objeto3d();
-    objetoRotado = new ObjRotacion();
+    objetoRotado = new Objeto3d();
     ajedrez=false;
+    bool tapaS = false;
+    bool tapaI = false;
+  	Objeto3d::TipoPoligono polygon = Objeto3d::FILL;
 }
 
 void Escena::inicializar(int UI_window_width,int UI_window_height) {
@@ -46,15 +49,16 @@ void Escena::draw_objects() {
         std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
         objeto3d = new ObjetoPLY(&d[0]);
         mostrarM="";
-        modo = 'S';
+        modo = 'C';
     }
-    if(mostrarM=="PLYR"){
+    else if(mostrarM=="PLYR"){
       directPLY="peon.ply";
       std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
       objeto3d = new ObjetoPLY(&d[0]);
       aRotar = objeto3d -> getVertices();
-      objetoRotado -> generaRotacion( aRotar , 3, false,false);
-      mostrarM="";
+      objetoRotado -> generaRotacion( aRotar, tapaS,tapaI);
+      mostrarM= "" ;
+      modo = 'C';
     }
     else if(mostrarM=="Rotacion"){
 
@@ -68,9 +72,9 @@ void Escena::draw_objects() {
       v1.z = 0.0;
       aRotar.push_back(v1);
 
-      objetoRotado -> generaRotacion( aRotar, 4, false,false);
-      std::vector<Vertice> v = objetoRotado -> getVertices();
-      std::vector<Cara> c = objetoRotado -> getCaras();
+      objeto3d -> generaRotacion( aRotar, tapaS,tapaI);
+      std::vector<Vertice> v = objeto3d -> getVertices();
+      std::vector<Cara> c = objeto3d -> getCaras();
 
       std::cout<<v.size() <<" Tamaño v\n";
 
@@ -83,52 +87,50 @@ void Escena::draw_objects() {
         std::cout<< c[i].v0<< " v0 "<< c[i].v1<< " v1 "<< c[i].v2 << "v2\n";
       }
       mostrarM="";
+      modo = 'C';
     }
 
 
     switch (modo) {
 
         case 'A':
-            objeto3d -> drawObjeto3d(Objeto3d::LINE,ajedrez);
+            polygon = Objeto3d::LINE;
+            objeto3d -> drawObjeto3d(polygon,ajedrez);
             break;
 
         case 'S':
-            objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
+            polygon = Objeto3d::FILL;
+            objeto3d -> drawObjeto3d(polygon,ajedrez);
             break;
 
         case 'P':
-            objeto3d -> drawObjeto3d(Objeto3d::POINTS,ajedrez);
+            polygon = Objeto3d::POINTS;
+            objeto3d -> drawObjeto3d(polygon,ajedrez);
             break;
-
-        case 'X'://Modo Ajedrez
-            objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
+            
+        //Modo Ajedrez
+        case 'X':
+            polygon = Objeto3d::FILL;
+            objeto3d -> drawObjeto3d(polygon,ajedrez);
             break;
 
         case 'C':
-            objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
+            objeto3d -> drawObjeto3d(polygon,ajedrez);
             break;
 
         case 'T':
-            objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
+            objeto3d -> drawObjeto3d(polygon,ajedrez);
             break;
 
         case 'R':
-            objeto3d -> drawObjeto3d(Objeto3d::FILL, ajedrez);
+            polygon = Objeto3d::FILL;
+            objeto3d -> drawObjeto3d(polygon, ajedrez);
             break;
 
         case 'W':
-            objetoRotado-> drawObjeto3d(Objeto3d::FILL, ajedrez);
+            polygon = Objeto3d::FILL;
+            objeto3d -> drawObjeto3d(polygon, ajedrez);
             break;
-
-        case '+':
-            objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
-            break;
-
-        case '-':
-            objeto3d -> drawObjeto3d(Objeto3d::FILL,ajedrez);
-            break;
-
-
         }
 }
 
@@ -153,7 +155,7 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
     }
     else if (toupper(Tecla1)=='A' || toupper(Tecla1)=='P' || toupper(Tecla1)=='S'
             || toupper(Tecla1)=='T'|| toupper(Tecla1)=='C' || toupper(Tecla1)=='X'|| toupper(Tecla1)=='M' || toupper(Tecla1)=='R' || toupper(Tecla1)== '+'
-            || toupper(Tecla1)== '-'|| toupper(Tecla1)=='W'){
+            || toupper(Tecla1)== '-'|| toupper(Tecla1)=='W'|| toupper(Tecla1)=='H' || toupper(Tecla1)=='I'){
 
             modo = toupper(Tecla1);
 
@@ -188,27 +190,47 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                     break;
 
                 case 'M':
-                    mostrarM = "PLY";
+                    mostrarM = "PLYR";
                     break;
 
                 case 'R':
-                    mostrarM="PLYR";
+                    mostrarM="PLY";
                     break;
 
                 case '+':
                     objeto3d -> ampliarVertices();
                     objetoRotado -> ampliarVertices();
+                    modo='C';
                     break;
 
                 case '-':
                     objeto3d -> reducirVertices();
                     objetoRotado -> reducirVertices();
+                    modo='C';
                     break;
 
                 case 'W':
-                ajedrez = false;
-                mostrarM="Rotacion";
-                break;
+                    ajedrez = false;
+                    mostrarM="Rotacion";
+                    objeto3d = new ObjRotacion();
+                    break;
+
+                case 'H':
+                    mostrarM="Tapa superior";
+                    if(tapaS==true){
+                      tapaS=false;
+                    }else tapaS=true;
+                    modo='C';
+                    break;
+
+                case 'I':
+                    mostrarM="Tapa inferior";
+                    if(tapaI==true){
+                      tapaI=false;
+                    }else tapaI=true;
+                    modo='C';
+                    break;
+
 
             }
             std::cout << "Cambiado a modo " << mostrarM << std::endl;
