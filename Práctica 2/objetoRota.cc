@@ -8,9 +8,10 @@ ObjRotacion::ObjRotacion(){};
 void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, bool tapaS, bool tapaI){
 
     bool salir = false;
+    int tamIni = aRotar.size();
     Vertice pTapaSup, pTapaInf; //Punto de la tapa superior y tapa inferior
 
-    if(aRotar[0].x == 0.0){ // Hay tapa inferior.
+    if(aRotar[0].x == 0.0){ // Hay tapa Superior.
 
         //Tras comprobar si hay tapa inferior, la introduzco en el vértice
         //creado antes y lo borro del vector de puntos a rotar
@@ -27,21 +28,21 @@ void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, b
         pTapaSup.z = aRotar[0].z;
       }
 
-    if(aRotar[aRotar.size()-1].x == 0.0){
+    if(aRotar[tamIni-1].x == 0.0){// Hay tapa inferior.
 
         //Tras comprobar si hay tapa inferior, la introduzco en el vértice
         // creado antes y lo borro del vector de puntos a rotar
-        pTapaInf.x= aRotar[aRotar.size()-1].x;
-        pTapaInf.y= aRotar[aRotar.size()-1].y;
-        pTapaInf.z= aRotar[aRotar.size()-1].z;
+        pTapaInf.x= aRotar[tamIni-1].x;
+        pTapaInf.y= aRotar[tamIni-1].y;
+        pTapaInf.z= aRotar[tamIni-1].z;
 
         aRotar.pop_back();
     }else{
       //Si no existe el punto, lo creo para crear la tapa en caso de que me la
       //pidan.
         pTapaInf.x = 0;
-        pTapaInf.y = aRotar[aRotar.size()-1].y;
-        pTapaInf.z = aRotar[aRotar.size()-1].z;
+        pTapaInf.y = aRotar[tamIni-1].y;
+        pTapaInf.z = aRotar[tamIni-1].z;
     }
 
 
@@ -51,10 +52,10 @@ void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, b
     vertices = aRotar;
     //Creo dos índices para trabajar sobre los vectores de caras y vértices
     //de mi clase Objeto3D
-    unsigned int indiceVertice = aRotar.size();
+    unsigned int indiceVertice = tamIni;
 
     //Redimensiono mi vector, para poder acceder a posiciones independientemente
-    vertices.resize(aRotar.size()*(iteraciones));
+    vertices.resize(tamIni*(iteraciones));
     caras.clear();
 
     for(int i=0; i<iteraciones-1; i++){
@@ -63,7 +64,7 @@ void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, b
         vertices[indiceVertice] = aRotar[0];
         indiceVertice++;
 
-        for(unsigned int j=1; j < aRotar.size();j++){
+        for(unsigned int j=1; j < tamIni;j++){
 
             aRotar[j] = rotarPunto(aRotar[j], anguloRotacion);
             vertices[indiceVertice] = aRotar[j];
@@ -72,14 +73,14 @@ void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, b
             Cara c;
             c.v0 = indiceVertice;
             c.v1 = indiceVertice-1;
-            c.v2 = indiceVertice-aRotar.size();
+            c.v2 = indiceVertice-tamIni;
 
             caras.push_back(c);
 
             //Introduzco la segunda "Media Cara"
-            c.v0 = indiceVertice-aRotar.size();
+            c.v0 = indiceVertice-tamIni;
             c.v1 = indiceVertice-1;
-            c.v2 = indiceVertice-aRotar.size()-1;
+            c.v2 = indiceVertice-tamIni-1;
 
             caras.push_back(c);
             indiceVertice++;
@@ -88,20 +89,20 @@ void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, b
 
 
     //Unir las últimas caras con las primeras
-     for(unsigned int i=1; i < aRotar.size() ; i++){
+     for(unsigned int i=1; i < tamIni ; i++){
 
         //Introduzco la primera "Media Cara"
         Cara c;
         c.v0 = i-1;
-        c.v1 = (indiceVertice - aRotar.size()) + i;
+        c.v1 = (indiceVertice - tamIni) + i;
         c.v2 = i;
 
         caras.push_back(c);
 
         //Introduzco la segunda "Media Cara"
         c.v0 = i-1;
-        c.v1 = (indiceVertice - aRotar.size()) + i-1;
-        c.v2 = (indiceVertice - aRotar.size()) + i;
+        c.v1 = (indiceVertice - tamIni) + i-1;
+        c.v2 = (indiceVertice - tamIni) + i;
         caras.push_back(c);
     }
 
@@ -110,28 +111,29 @@ void ObjRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, b
 
         vertices.push_back(pTapaSup);
 
-        for(int i=0; i<iteraciones; i++){
+        for(int i=0; i<iteraciones+1; i++){
             Cara c;
             c.v0 = vertices.size()-1;
-            c.v1 = (i*aRotar.size());
-            c.v2 = ((i+1)*aRotar.size()) % (iteraciones*aRotar.size());
+            c.v1 = (i*tamIni);
+            c.v2 = ((i+1)*tamIni) % (iteraciones*tamIni);
             caras.push_back(c);
         }
     }
-/*
-    if(tapaI == true){
-        vertices.push_back(pTapaInf);
-        int ultimoVertice = aRotar.size()-1;
 
-        for(int i=0; i<iteraciones; i++){
+    if(tapaI == true){
+
+        vertices.push_back(pTapaInf);
+        int ultimoVertice = tamIni-1;
+
+        for(int i=0; i<iteraciones+1; i++){
             Cara c;
             c.v0 = vertices.size()-1;
-            c.v1 = ultimoVertice + (i+aRotar.size());
-            c.v2 = ( (i+1) * aRotar.size() -1 ) % ( iteraciones*aRotar.size()-1);
+            c.v1 = ultimoVertice + ((i+1) * tamIni) % (iteraciones*tamIni);
+            c.v2 = ultimoVertice + (i*tamIni);
             caras.push_back(c);
         }
     }
-*/
+
     for(unsigned int i=0; i<vertices.size();i++){
 				Vertice vc;
 				vc.x = 0;

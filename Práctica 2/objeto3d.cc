@@ -62,31 +62,13 @@ std::vector<Vertice> Objeto3d::getVertices(){
   return vertices;
 }
 
+void Objeto3d::setVertices(std::vector<Vertice> v){
+  vertices = v;
+}
+
+
 std::vector<Cara> Objeto3d::getCaras(){
   return caras;
-}
-
-
-void Objeto3d::ampliarVertices(){
-  for(int i=0; i<vertices.size();i++){
-    vertices[i].x= vertices[i].x*1.5;
-    vertices[i].y= vertices[i].y*1.5;
-    vertices[i].z= vertices[i].z*1.5;
-
-  }
-
-  std::cout<< "Ampliado\n";
-}
-
-void Objeto3d::reducirVertices(){
-    for(int i=0; i<vertices.size();i++){
-      vertices[i].x= vertices[i].x/1.5;
-      vertices[i].y= vertices[i].y/1.5;
-      vertices[i].z= vertices[i].z/1.5;
-
-    }
-
-    std::cout<< "Reducido\n";
 }
 
 void Objeto3d::generaRotacion(std::vector<Vertice> aRotar,int iteraciones, bool tapaS, bool tapaI){

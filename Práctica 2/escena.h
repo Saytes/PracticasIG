@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "ejes.h"
 #include "cubo.h"
+#include "objeto3d.h"
 #include "objetoPLY.h"
 #include "objetoRota.h"
 #include "tetraedro.h"
@@ -40,10 +41,11 @@ private:
 	std::string mostrarM;
   std::string directPLY;
 	std::vector<Vertice> aRotar;
+	std::vector<Vertice> m;
   char* d;
 	bool tapaS;
 	bool tapaI;
-	int iteraciones;
+	int iteraciones,aum,dec,dif;
   std::string c;
 	Vertice v1;
 public:
@@ -58,5 +60,7 @@ public:
 	// Interacci�n con la escena
 	int teclaPulsada(unsigned char Tecla1,int x,int y) ;
 	void teclaEspecial(int Tecla1,int x,int y);
+	void ampliarVertices(std::vector<Vertice> &m);
+	void reducirVertices(std::vector<Vertice> &m);
 };
 #endif

@@ -17,6 +17,7 @@ ObjetoPLY::ObjetoPLY(char * fichero){
 	std::vector<int> faces;
 	obj.open(fichero);
 	obj.read(vertex, faces);
+
 	for(int i=0;i<vertex.size();i=i+3){
 		Vertice vertice;
 		vertice.x = vertex[i];
@@ -24,12 +25,19 @@ ObjetoPLY::ObjetoPLY(char * fichero){
 		vertice.z = vertex[i+2];
 		vertices.push_back(vertice);
 	}
-	for(int i=0;i<faces.size();i=i+3){
-		Cara cara;
-		cara.v0 = (GLuint)faces[i];
-		cara.v1 = (GLuint)faces[i+1];
-		cara.v2 = (GLuint)faces[i+2];
-		caras.push_back(cara);
+	if(faces.size()>3){ //Solo una cara si es menor que 3
+		std::cout<< faces.size()<<"\n";
+
+		for(int i=0;i<faces.size();i=i+3){
+			Cara cara;
+			cara.v0 = (GLuint)faces[i];
+			cara.v1 = (GLuint)faces[i+1];
+			cara.v2 = (GLuint)faces[i+2];
+			caras.push_back(cara);
+		}
+	}else{
+
+			std::cout<< "El PLY solo tiene una cara."<<"\n";
 	}
 	for(unsigned int i=0; i<vertices.size();i++){
 			Vertice vc;

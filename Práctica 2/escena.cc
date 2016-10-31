@@ -21,6 +21,9 @@ Escena::Escena(){
     tapaS = false;
     tapaI = false;
     iteraciones = 3;
+    aum=0;
+    dec=0;
+    dif=0;
   	Objeto3d::TipoPoligono polygon = Objeto3d::FILL;
 }
 
@@ -45,7 +48,8 @@ void Escena::inicializar(int UI_window_width,int UI_window_height) {
 void Escena::draw_objects() {
 
     if(mostrarM=="PLY"){
-
+        std::cout<<"Introduzca la direccion del fichero PLY" <<std::endl;
+        std::getline(cin,directPLY);
         std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
         objeto3d = new ObjetoPLY(&d[0]);
         mostrarM="";
@@ -56,17 +60,18 @@ void Escena::draw_objects() {
       do {
         std::cout << "Introduzca el numero de iteraciones: ";
         std::cin >> c;
+        std::cin.ignore(1);
         iteraciones = atoi(c.c_str());
       } while(iteraciones<3);
-      std::cout<<"Introduzca la direccion del fichero PLY" <<std::endl;
+      std::cout<<"Introduzca la direccion del fichero PLY: ";
       std::getline(cin,directPLY);
       std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
       objeto3d = new ObjetoPLY(&d[0]);
       aRotar = objeto3d -> getVertices();
-      objetoRotado -> generaRotacion( aRotar,iteraciones, tapaS,tapaI);
+      objeto3d = new ObjRotacion();
+      objeto3d -> generaRotacion( aRotar,iteraciones, tapaS,tapaI);
       mostrarM= "" ;
-      //Modo por defecto = C
-      modo = 'C';
+      modo='C';
     }
     else if(mostrarM=="Rotacion"){
 
@@ -79,7 +84,7 @@ void Escena::draw_objects() {
       v1.y = 50.0;
       v1.z = 0.0;
       aRotar.push_back(v1);
-    /*  v1.x = 50.0;
+      /*v1.x = 50.0;
       v1.y = 0.0;
       v1.z = 0.0;
       aRotar.push_back(v1);*/
@@ -92,9 +97,22 @@ void Escena::draw_objects() {
       mostrarM="";
       //Modo por defecto = C
       modo = 'C';
-    }else if (mostrarM=="Tapa inferior" || mostrarM=="Tapa superior") {
-
+    }else if(mostrarM=="Tapa inferior" || mostrarM=="Tapa superior") {
+      //Conservo el tamaño anterior
+      dif = aum-dec;
+      if(dif>=0){
+        dif = dif*(-1);
+        for(int i=0; i<aum;i++){
+          ampliarVertices(aRotar);
+        }
+      }else{
+        for(int i=0; i<dif;i++){
+          reducirVertices(aRotar);
+        }
+      }
       objeto3d -> generaRotacion( aRotar, iteraciones, tapaS,tapaI);
+      aum =0;
+      dec=0;
       //Modo por defecto = C
       modo = 'C';
       mostrarM="";
@@ -127,6 +145,11 @@ void Escena::draw_objects() {
         case 'C':
             //Modo por defecto = C
             objeto3d -> drawObjeto3d(polygon,ajedrez);
+            break;
+
+        case 'M':
+            //Modo por defecto = C
+            objetoRotado -> drawObjeto3d(polygon,ajedrez);
             break;
 
         case 'T':
@@ -202,6 +225,7 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
 
                 case 'M':
                     mostrarM = "PLYR";
+                    objetoRotado = new ObjRotacion();
                     break;
 
                 case 'R':
@@ -209,14 +233,18 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                     break;
 
                 case '+':
-                    objeto3d -> ampliarVertices();
-                    objetoRotado -> ampliarVertices();
+                    m = objeto3d -> getVertices();
+                    ampliarVertices(m);
+                    objeto3d -> setVertices(m);
+                    aum++;
                     modo='C';
                     break;
 
                 case '-':
-                    objeto3d -> reducirVertices();
-                    objetoRotado -> reducirVertices();
+                    m = objeto3d -> getVertices();
+                    reducirVertices(m);
+                    objeto3d -> setVertices(m);
+                    dec++;
                     modo='C';
                     break;
 
@@ -307,4 +335,26 @@ glRotatef(Observer_angle_y,0,1,0);
 void Escena::draw_axis()
 {
 ejes.draw();
+}
+
+void Escena::ampliarVertices(std::vector<Vertice> &m){
+
+  for(int i=0; i<m.size();i++){
+    m[i].x= m[i].x*1.5;
+    m[i].y= m[i].y*1.5;
+    m[i].z= m[i].z*1.5;
+
+  }
+  std::cout<< "Ampliado\n";
+}
+
+void Escena::reducirVertices(std::vector<Vertice> &m){
+
+    for(int i=0; i<m.size();i++){
+      m[i].x= m[i].x/1.5;
+      m[i].y= m[i].y/1.5;
+      m[i].z= m[i].z/1.5;
+
+    }
+    std::cout<< "Reducido\n";
 }
