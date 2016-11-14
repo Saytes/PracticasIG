@@ -142,7 +142,6 @@ Cubo::Cubo(){
 	for(int i = 0; i<caras.size(); i+=2){
 		caras1.push_back(caras[i]);
 		caras2.push_back(caras[i+1]);
-
 	}
 
 }
