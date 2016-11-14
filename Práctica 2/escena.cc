@@ -174,6 +174,7 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                     std::cout << "Introduzca el angulo en grados: ";
                     std::cin >> ang;
                     std::cin.ignore(1);
+
                     //Introduzco dos vértices por defecto
                     v1.x = 50.0;
                     v1.y = 50.0;

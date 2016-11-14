@@ -5,7 +5,7 @@
 ObjetoRotacion::ObjetoRotacion(){};
 
 
-void ObjetoRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, bool tapaS, bool tapaI,float ang/*, char eje*/){
+void ObjetoRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, bool tapaS, bool tapaI,float ang){
 
     bool salir = false;
     int tamIni = aRotar.size();
@@ -104,7 +104,7 @@ void ObjetoRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones
             vertices[indiceVertice] = aRotar[0];
             indiceVertice++;
 
-            for(unsigned int j=1; j < tamIni;j++){
+            for(unsigned int j=1; j < tamIni ;j++){
 
                 aRotar[j] = rotarPunto(aRotar[j], anguloRotacion);
                 vertices[indiceVertice] = aRotar[j];
@@ -170,7 +170,7 @@ void ObjetoRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones
 
         vertices.push_back(pTapaSup);
 
-        for(int i=0; i<iteraciones+1; i++){
+        for(int i=0; i<iteraciones; i++){
             Cara c;
             c.v0 = vertices.size()-1;
             c.v1 = (i*tamIni);
@@ -184,7 +184,7 @@ void ObjetoRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones
         vertices.push_back(pTapaInf);
         int ultimoVertice = tamIni-1;
 
-        for(int i=0; i<iteraciones+1; i++){
+        for(int i=0; i<iteraciones; i++){
             Cara c;
             c.v0 = vertices.size()-1;
             c.v1 = ultimoVertice + ((i+1) * tamIni) % (iteraciones*tamIni);
@@ -220,21 +220,10 @@ void ObjetoRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones
 Vertice ObjetoRotacion::rotarPunto(Vertice v, float ang){
 
     Vertice sol;
-    /*if(eje == 'x'){
-       sol.x = v.x;
-       sol.y = (cos(ang)*v.y) - (sin(ang)*v.z);
-       sol.z = (sin(ang)*v.y)+(cos(ang)*(v.z));
 
-   }else if(eje=='y'){*/
      sol.x = (cos(ang)*v.x) + (sin(ang)*(v.z));
      sol.y = v.y;
      sol.z = (-1.0)*(sin(ang)*v.x)+(cos(ang)*(v.z));
 
-    /*}else if(eje == 'z'){
-        sol.x = (cos(ang)*v.x) - (sin(ang)*v.y);
-        sol.y = (sin(ang)*v.x) + (cos(ang)*(v.y));
-        sol.z = v.z;
-    }
-*/
     return sol;
 }

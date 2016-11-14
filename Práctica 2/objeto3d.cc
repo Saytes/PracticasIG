@@ -73,5 +73,5 @@ std::vector<Cara> Objeto3d::getCaras(){
   return caras;
 }
 
-void Objeto3d::generaRotacion(std::vector<Vertice> aRotar,int iteraciones, bool tapaS, bool tapaI,float anguloRotacion/*, char eje*/){
+void Objeto3d::generaRotacion(std::vector<Vertice> aRotar,int iteraciones, bool tapaS, bool tapaI,float anguloRotacion){
 }

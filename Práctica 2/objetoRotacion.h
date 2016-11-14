@@ -12,7 +12,7 @@ class ObjetoRotacion : public Objeto3d{
 	public:
 
 	    ObjetoRotacion();
-		void generaRotacion(std::vector<Vertice> aRotar, int iteraciones, bool tapaS, bool tapaI,float anguloRotacion/*, char eje*/);
+		void generaRotacion(std::vector<Vertice> aRotar, int iteraciones, bool tapaS, bool tapaI,float anguloRotacion);
 		Vertice rotarPunto(Vertice v, float ang);
 
 	protected:
