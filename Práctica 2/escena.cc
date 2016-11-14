@@ -16,14 +16,14 @@ Escena::Escena(){
     Observer_angle_x = Observer_angle_y=0;
     ejes.changeAxisSize(5000);
     objeto3d = new Objeto3d();
-    objetoRotado = new Objeto3d();
     ajedrez=false;
     tapaS = false;
     tapaI = false;
+    boolp = false;
     iteraciones = 3;
     aum=0;
     dec=0;
-    dif=0;
+    ang=360.0;
   	Objeto3d::TipoPoligono polygon = Objeto3d::FILL;
 }
 
@@ -47,125 +47,7 @@ void Escena::inicializar(int UI_window_width,int UI_window_height) {
 //***************************************************************************
 void Escena::draw_objects() {
 
-    if(mostrarM=="PLY"){
-        std::cout<<"Introduzca la direccion del fichero PLY" <<std::endl;
-        std::getline(cin,directPLY);
-        std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
-        objeto3d = new ObjetoPLY(&d[0]);
-        mostrarM="";
-        //Modo por defecto = C
-        modo = 'C';
-    }
-    else if(mostrarM=="PLYR"){
-      do {
-        std::cout << "Introduzca el numero de iteraciones: ";
-        std::cin >> c;
-        std::cin.ignore(1);
-        iteraciones = atoi(c.c_str());
-      } while(iteraciones<3);
-      std::cout<<"Introduzca la direccion del fichero PLY: ";
-      std::getline(cin,directPLY);
-      std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
-      objeto3d = new ObjetoPLY(&d[0]);
-      aRotar = objeto3d -> getVertices();
-      objeto3d = new ObjRotacion();
-      objeto3d -> generaRotacion( aRotar,iteraciones, tapaS,tapaI);
-      mostrarM= "" ;
-      modo='C';
-    }
-    else if(mostrarM=="Rotacion"){
-
-      do {
-        std::cout << "Introduzca el numero de iteraciones: ";
-        std::cin >> c;
-        iteraciones = atoi(c.c_str());
-      } while(iteraciones<3);
-      v1.x = 50.0;
-      v1.y = 50.0;
-      v1.z = 0.0;
-      aRotar.push_back(v1);
-      /*v1.x = 50.0;
-      v1.y = 0.0;
-      v1.z = 0.0;
-      aRotar.push_back(v1);*/
-      v1.x = 50.0;
-      v1.y = -50.0;
-      v1.z = 0.0;
-      aRotar.push_back(v1);
-      objeto3d -> generaRotacion( aRotar, iteraciones, tapaS,tapaI);
-
-      mostrarM="";
-      //Modo por defecto = C
-      modo = 'C';
-    }else if(mostrarM=="Tapa inferior" || mostrarM=="Tapa superior") {
-      //Conservo el tamaño anterior
-      dif = aum-dec;
-      if(dif>=0){
-        dif = dif*(-1);
-        for(int i=0; i<aum;i++){
-          ampliarVertices(aRotar);
-        }
-      }else{
-        for(int i=0; i<dif;i++){
-          reducirVertices(aRotar);
-        }
-      }
-      objeto3d -> generaRotacion( aRotar, iteraciones, tapaS,tapaI);
-      aum =0;
-      dec=0;
-      //Modo por defecto = C
-      modo = 'C';
-      mostrarM="";
-    }
-
-
-    switch (modo) {
-
-        case 'A':
-            polygon = Objeto3d::LINE;
-            objeto3d -> drawObjeto3d(polygon,ajedrez);
-            break;
-
-        case 'S':
-            polygon = Objeto3d::FILL;
-            objeto3d -> drawObjeto3d(polygon,ajedrez);
-            break;
-
-        case 'P':
-            polygon = Objeto3d::POINTS;
-            objeto3d -> drawObjeto3d(polygon,ajedrez);
-            break;
-
-        //Modo Ajedrez
-        case 'X':
-            polygon = Objeto3d::FILL;
-            objeto3d -> drawObjeto3d(polygon,ajedrez);
-            break;
-
-        case 'C':
-            //Modo por defecto = C
-            objeto3d -> drawObjeto3d(polygon,ajedrez);
-            break;
-
-        case 'M':
-            //Modo por defecto = C
-            objetoRotado -> drawObjeto3d(polygon,ajedrez);
-            break;
-
-        case 'T':
-            objeto3d -> drawObjeto3d(polygon,ajedrez);
-            break;
-
-        case 'R':
-            polygon = Objeto3d::FILL;
-            objeto3d -> drawObjeto3d(polygon, ajedrez);
-            break;
-
-        case 'W':
-            polygon = Objeto3d::FILL;
-            objeto3d -> drawObjeto3d(polygon, ajedrez);
-            break;
-        }
+    objeto3d -> drawObjeto3d(polygon,ajedrez);
 }
 
 
@@ -189,7 +71,7 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
     }
     else if (toupper(Tecla1)=='A' || toupper(Tecla1)=='P' || toupper(Tecla1)=='S'
             || toupper(Tecla1)=='T'|| toupper(Tecla1)=='C' || toupper(Tecla1)=='X'|| toupper(Tecla1)=='M' || toupper(Tecla1)=='R' || toupper(Tecla1)== '+'
-            || toupper(Tecla1)== '-'|| toupper(Tecla1)=='W'|| toupper(Tecla1)=='H' || toupper(Tecla1)=='I'){
+            || toupper(Tecla1)== '-'|| toupper(Tecla1)=='W'|| toupper(Tecla1)=='H' || toupper(Tecla1)=='I'|| toupper(Tecla1)=='E'){
 
             modo = toupper(Tecla1);
 
@@ -197,39 +79,75 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
 
                 case 'A':
                     mostrarM="Alambre";
+                    polygon = Objeto3d::LINE;
                     ajedrez=false;
                     break;
+
                 case 'P':
                     mostrarM="Puntos";
+                    polygon = Objeto3d::POINTS;
                     ajedrez=false;
                     break;
+
                 case 'S':
                     mostrarM="Sólido";
+                    polygon = Objeto3d::FILL;
                     ajedrez=false;
                     break;
+
                 case 'X':
                     mostrarM="Ajedrez";
+                    polygon = Objeto3d::FILL;
                     ajedrez=true;
                     break;
+
                 case 'T':
+                    mostrarM="Tetraedro";
                     objeto3d = new Tetraedro();
                     ajedrez=false;
-                    mostrarM="Tetraedro";
                     break;
 
                 case 'C':
+                    mostrarM="Cubo";
                     objeto3d = new Cubo();
                     ajedrez=false;
-                    mostrarM="Cubo";
                     break;
 
                 case 'M':
-                    mostrarM = "PLYR";
-                    objetoRotado = new ObjRotacion();
+                    {
+                        mostrarM = "Rotacion a un PLY";
+                        //Compruebo iteraciones y cargo el directorio del PLY
+                        iteraciones= comprobarIteraciones();
+                        std::cout<<"Introduzca la direccion del fichero PLY" <<std::endl;
+                        std::getline(cin,directPLY);
+                        std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
+                        objeto3d = new ObjetoPLY(&d[0]);
+                        //Copio los vértices
+                        aRotar = objeto3d -> getVertices();
+                        //Re-inicializo como ObjetoRotacion
+                        objeto3d = new ObjetoRotacion();
+                        //Genero rotación
+                        objeto3d -> generaRotacion( aRotar,iteraciones, tapaS,tapaI,ang);
+                    }
                     break;
 
-                case 'R':
-                    mostrarM="PLY";
+              case 'R':
+                    {
+                        mostrarM="PLY";
+                        polygon = Objeto3d::FILL;
+                        //Cargo el directorio del PLY
+                        std::cout<<"Introduzca la direccion del fichero PLY" <<std::endl;
+                        std::getline(cin,directPLY);
+                        int tamD = directPLY.size();
+                        string extension = directPLY.substr(tamD-5);
+                        if(extension != ".ply"){
+                            std::cout<< "El archivo introducido no contiene la extensión, se le añadirá automáticamente.\n";
+                            directPLY.append(".ply");
+                        }
+                        std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
+
+                        objeto3d = new ObjetoPLY(&d[0]);
+                    }
                     break;
 
                 case '+':
@@ -237,7 +155,6 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                     ampliarVertices(m);
                     objeto3d -> setVertices(m);
                     aum++;
-                    modo='C';
                     break;
 
                 case '-':
@@ -245,13 +162,29 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                     reducirVertices(m);
                     objeto3d -> setVertices(m);
                     dec++;
-                    modo='C';
                     break;
 
                 case 'W':
-                    ajedrez = false;
                     mostrarM="Rotacion";
-                    objeto3d = new ObjRotacion();
+                    polygon = Objeto3d::FILL;
+                    objeto3d = new ObjetoRotacion();
+                    aRotar.clear();
+                    iteraciones = comprobarIteraciones();
+                    //Leo un ángulo en grados
+                    std::cout << "Introduzca el angulo en grados: ";
+                    std::cin >> ang;
+                    std::cin.ignore(1);
+                    //Introduzco dos vértices por defecto
+                    v1.x = 50.0;
+                    v1.y = 50.0;
+                    v1.z = 0.0;
+                    aRotar.push_back(v1);
+                    v1.x = 50.0;
+                    v1.y = -50.0;
+                    v1.z = 0.0;
+                    aRotar.push_back(v1);
+                    objeto3d -> generaRotacion( aRotar, iteraciones, tapaS,tapaI,ang);
+                    ajedrez = false;
                     break;
 
                 case 'H':
@@ -259,7 +192,7 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                     if(tapaS==true){
                       tapaS=false;
                     }else tapaS=true;
-                    modo='C';
+                    estadoAnterior();
                     break;
 
                 case 'I':
@@ -267,9 +200,8 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                     if(tapaI==true){
                       tapaI=false;
                     }else tapaI=true;
-                    modo='C';
+                    estadoAnterior();
                     break;
-
 
             }
             std::cout << "Cambiado a modo " << mostrarM << std::endl;
@@ -357,4 +289,36 @@ void Escena::reducirVertices(std::vector<Vertice> &m){
 
     }
     std::cout<< "Reducido\n";
+}
+
+int Escena::comprobarIteraciones(){
+
+    int it;
+    string entrada;
+    do{
+        std::cout << "Introduzca el numero de iteraciones: ";
+        std::cin >> entrada;
+        std::cin.ignore(1);
+        it = atoi(entrada.c_str());
+    }while(it<3);
+
+    return it;
+}
+
+void Escena::estadoAnterior(){
+    //Conservo el tamaño anterior
+    int dif = aum-dec;
+    if(dif>0){
+      for(int i=0; i<dif;i++){
+        ampliarVertices(aRotar);
+      }
+    }else if(dif<0){
+      dif = dif*(-1);
+      for(int i=0; i<dif;i++){
+        reducirVertices(aRotar);
+      }
+    }
+      aum=0;
+      dec=0;
+    objeto3d -> generaRotacion( aRotar, iteraciones, tapaS,tapaI,ang);
 }

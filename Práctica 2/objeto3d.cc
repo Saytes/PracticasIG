@@ -38,7 +38,6 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoPoligono polygon,bool modoA) const{
     }
     else{
         //Modo ajedrez
-
         glEnableClientState(GL_VERTEX_ARRAY);
         glVertexPointer( 3, GL_FLOAT, 0, &vertices[0]);
         glEnable(GL_CULL_FACE);
@@ -47,13 +46,16 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoPoligono polygon,bool modoA) const{
         //Primera parte del objeto
         glEnableClientState(GL_COLOR_ARRAY);
         glColorPointer(3, GL_FLOAT, 0, &color1[0]);
-        glDrawElements( GL_TRIANGLES,  caras.size()/2*3 , GL_UNSIGNED_INT, &caras[0]) ;
+
+        glDrawElements( GL_TRIANGLES,  caras1.size()*3 , GL_UNSIGNED_INT, &caras1[0]) ;
 
         //Segunda parte del objeto
         glEnableClientState(GL_COLOR_ARRAY);
         glColorPointer(3, GL_FLOAT, 0, &color2[0]);
-        glDrawElements( GL_TRIANGLES,  caras.size()/2*3 , GL_UNSIGNED_INT, &caras[caras.size()/2]) ;
+        glDrawElements( GL_TRIANGLES,  caras2.size()*3 , GL_UNSIGNED_INT, &caras2[0]) ;
+
     }
+
 
 
 }
@@ -71,5 +73,5 @@ std::vector<Cara> Objeto3d::getCaras(){
   return caras;
 }
 
-void Objeto3d::generaRotacion(std::vector<Vertice> aRotar,int iteraciones, bool tapaS, bool tapaI){
+void Objeto3d::generaRotacion(std::vector<Vertice> aRotar,int iteraciones, bool tapaS, bool tapaI,float anguloRotacion/*, char eje*/){
 }

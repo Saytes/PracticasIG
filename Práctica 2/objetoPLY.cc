@@ -36,8 +36,7 @@ ObjetoPLY::ObjetoPLY(char * fichero){
 			caras.push_back(cara);
 		}
 	}else{
-
-			std::cout<< "El PLY solo tiene una cara."<<"\n";
+		std::cout<< "Este PLY debería ser rotado para poderlo visualizar correctamente."<<"\n";
 	}
 	for(unsigned int i=0; i<vertices.size();i++){
 			Vertice vc;
@@ -54,4 +53,10 @@ ObjetoPLY::ObjetoPLY(char * fichero){
 			vc.z = 1.0;
 			color2.push_back(vc);
 	}
+	for(int i = 0; i<caras.size(); i+=2){
+		caras1.push_back(caras[i]);
+		caras2.push_back(caras[i+1]);
+
+	}
+
 }

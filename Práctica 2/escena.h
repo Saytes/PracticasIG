@@ -7,7 +7,7 @@
 #include "cubo.h"
 #include "objeto3d.h"
 #include "objetoPLY.h"
-#include "objetoRota.h"
+#include "objetoRotacion.h"
 #include "tetraedro.h"
 
 class Escena {
@@ -34,22 +34,17 @@ private:
 	void change_observer();
 
 // Variables para cambiar de modo y objetos
- 	Objeto3d *objeto3d, *objetoRotado;
+ 	Objeto3d *objeto3d;
 	Objeto3d::TipoPoligono polygon;
-	char modo;
-	bool ajedrez;
-	std::string mostrarM;
-  std::string directPLY;
-	std::vector<Vertice> aRotar;
-	std::vector<Vertice> m;
-  char* d;
-	bool tapaS;
-	bool tapaI;
-	int iteraciones,aum,dec,dif;
-  std::string c;
+	std::string mostrarM, directPLY, c;
+	std::vector<Vertice> aRotar,m;
 	Vertice v1;
+	char modo;
+  	char* d;
+	bool ajedrez,tapaS,tapaI,boolp;
+	int iteraciones,aum,dec;
+	float ang;
 public:
-
      Escena();
 	void inicializar(int UI_window_width,int UI_window_height);
 	void redimensionar(int newWidth,int newHeight) ;
@@ -62,5 +57,7 @@ public:
 	void teclaEspecial(int Tecla1,int x,int y);
 	void ampliarVertices(std::vector<Vertice> &m);
 	void reducirVertices(std::vector<Vertice> &m);
+	int comprobarIteraciones();
+	void estadoAnterior();
 };
 #endif

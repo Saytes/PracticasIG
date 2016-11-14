@@ -3,7 +3,7 @@
 #
 # nombre del fichero ejecutable
 #
-TARGETS= practica1
+TARGETS= prueba
 
 # banderas para el compilador (C y C++). Se indican los directorios donde se puenden
 # encontrar ficheros para incluir mediante la opcion -I
@@ -24,7 +24,7 @@ CC = g++
 
 # definicion de objetos
 #
-OBJECTS= practica1.o escena.o ejes.o objeto3d.o cubo.o tetraedro.o objetoPLY.o file_ply_stl.o objetoRota.o
+OBJECTS= prueba.o escena.o ejes.o objeto3d.o cubo.o tetraedro.o objetoPLY.o file_ply_stl.o objetoRotacion.o
 # orden que sera ejecutada por defecto
 #
 default : $(TARGETS)

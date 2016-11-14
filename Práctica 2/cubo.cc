@@ -8,10 +8,10 @@ Cubo::Cubo(){
 
     //------------------------
     //V0-FRONTAL-IZQ-ABAJO
-		v1.x = 0.0;
-		v1.y = 0.0;
-		v1.z = 75.0;
-		vertices.push_back(v1);
+	v1.x = 0.0;
+	v1.y = 0.0;
+	v1.z = 75.0;
+	vertices.push_back(v1);
     //------------------------
     //V1-FRONTAL-DERECHA-ABAJO
     v1.x = 75.0;
@@ -139,5 +139,10 @@ Cubo::Cubo(){
 	c1.v2 = 1;
 	caras.push_back(c1);
 	//----------------
+	for(int i = 0; i<caras.size(); i+=2){
+		caras1.push_back(caras[i]);
+		caras2.push_back(caras[i+1]);
+
+	}
 
 }

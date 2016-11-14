@@ -27,18 +27,13 @@ class Objeto3d{
     std::vector<Vertice> getVertices();
     void setVertices(std::vector<Vertice> v);
     std::vector<Cara> getCaras();
-    virtual void generaRotacion(std::vector<Vertice> aRotar, int iteraciones,bool tapaS, bool tapaI);
+    virtual void generaRotacion(std::vector<Vertice> aRotar, int iteraciones,bool tapaS, bool tapaI,float anguloRotacion/*, char eje*/);
 
 	protected:
 
-		bool modoA;
-		GLuint nver;				// Número total de vértices
-		GLuint ntri;				// Número total de triángulos
-		std::vector<Vertice> vertices;		// Vector de Vértices
-		std::vector<Vertice> colors;		// Vector de Vértices
-		std::vector<Vertice> color1;		// Vector de Vértices
-		std::vector<Vertice> color2;		// Vector de Vértices
-		std::vector<Cara> caras;		// Vector de Caras
+		bool modoA;       //Booleano que regula el modo ajedrez
+        std::vector<Vertice> vertices, colors,color1,color2;		// Vectores de Vértices
+		std::vector<Cara> caras, caras1, caras2;		// Vectores de Caras
 };
 
 #endif
