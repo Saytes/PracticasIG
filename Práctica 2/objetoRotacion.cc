@@ -48,7 +48,9 @@ void ObjetoRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones
 
     //Termina comprobación tapas.
     int pi= 3.1415;
-    float anguloRotacion = (ang*pi)/(iteraciones*180.0); //Genero ángulo en radianes
+    int dv = iteraciones-1;
+    if(ang == 360){dv= iteraciones;}
+    float anguloRotacion = (ang*pi)/(dv*180.0); //Genero ángulo en radianes
 
     //Limpio mis vectores referentes al Objeto3D
     vertices.clear();
@@ -129,42 +131,43 @@ void ObjetoRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones
     }
 
     //Uno las últimas caras con las primeras
-    if(menor == true){
-         for(unsigned int i=1; i < tamIni ; i++){
+    if(ang == 180 || ang == 360){
+        if(menor == true){
+             for(unsigned int i=1; i < tamIni ; i++){
 
-            //Introduzco la primera "Media Cara"
-            Cara c;
-            c.v0 = (indiceVertice - tamIni) + i;
-            c.v1 = i-1;
-            c.v2 = i;
+                //Introduzco la primera "Media Cara"
+                Cara c;
+                c.v0 = (indiceVertice - tamIni) + i;
+                c.v1 = i-1;
+                c.v2 = i;
 
-            caras.push_back(c);
+                caras.push_back(c);
 
-            //Introduzco la segunda "Media Cara"
-            c.v0 = i-1;
-            c.v1 = (indiceVertice - tamIni) + i;
-            c.v2 = (indiceVertice - tamIni) + i-1;
-            caras.push_back(c);
-        }
-    }else{
-        for(unsigned int i=1; i < tamIni ; i++){
+                //Introduzco la segunda "Media Cara"
+                c.v0 = i-1;
+                c.v1 = (indiceVertice - tamIni) + i;
+                c.v2 = (indiceVertice - tamIni) + i-1;
+                caras.push_back(c);
+            }
+        }else{
+            for(unsigned int i=1; i < tamIni ; i++){
 
-           //Introduzco la primera "Media Cara"
-           Cara c;
-           c.v0 = i-1;
-           c.v1 = (indiceVertice - tamIni) + i;
-           c.v2 = i;
+               //Introduzco la primera "Media Cara"
+               Cara c;
+               c.v0 = i-1;
+               c.v1 = (indiceVertice - tamIni) + i;
+               c.v2 = i;
 
-           caras.push_back(c);
+               caras.push_back(c);
 
-           //Introduzco la segunda "Media Cara"
-           c.v0 = i-1;
-           c.v1 = (indiceVertice - tamIni) + i-1;
-           c.v2 = (indiceVertice - tamIni) + i;
-           caras.push_back(c);
+               //Introduzco la segunda "Media Cara"
+               c.v0 = i-1;
+               c.v1 = (indiceVertice - tamIni) + i-1;
+               c.v2 = (indiceVertice - tamIni) + i;
+               caras.push_back(c);
+           }
        }
-   }
-
+    }
     // Uno las tapas
     if(tapaS == true){
 
