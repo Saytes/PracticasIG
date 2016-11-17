@@ -34,7 +34,9 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoPoligono polygon,bool modoA) const{
         glPolygonMode(GL_FRONT_AND_BACK, modoP);
         glEnableClientState(GL_COLOR_ARRAY);
         glColorPointer(3, GL_FLOAT, 0, &colors[0]);
+        std::cout<<"size caras: "<< caras.size() <<"   size vertices: "<< vertices.size()<< "\n";
         glDrawElements( GL_TRIANGLES,  caras.size()*3 , GL_UNSIGNED_INT, &caras[0]) ;
+        std::cout<<"Dibujo el cubo de obj3d\n";
     }
     else{
         //Modo ajedrez
@@ -46,7 +48,6 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoPoligono polygon,bool modoA) const{
         //Primera parte del objeto
         glEnableClientState(GL_COLOR_ARRAY);
         glColorPointer(3, GL_FLOAT, 0, &color1[0]);
-
         glDrawElements( GL_TRIANGLES,  caras1.size()*3 , GL_UNSIGNED_INT, &caras1[0]) ;
 
         //Segunda parte del objeto

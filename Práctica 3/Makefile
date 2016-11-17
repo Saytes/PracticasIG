@@ -24,7 +24,7 @@ CC = g++
 
 # definicion de objetos
 #
-OBJECTS= prueba.o escena.o ejes.o objeto3d.o cubo.o tetraedro.o objetoPLY.o file_ply_stl.o objetoRotacion.o
+OBJECTS= prueba.o escena.o ejes.o objeto3d.o cubo.o tetraedro.o objetoPLY.o file_ply_stl.o objetoRotacion.o cilindro.o objetoJerarquico.o
 # orden que sera ejecutada por defecto
 #
 default : $(TARGETS)

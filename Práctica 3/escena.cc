@@ -16,6 +16,7 @@ Escena::Escena(){
     Observer_angle_x = Observer_angle_y=0;
     ejes.changeAxisSize(5000);
     objeto3d = new Objeto3d();
+    objetoJerarquico = new ObjetoJerarquico();
     ajedrez=false;
     tapaS = false;
     tapaI = false;
@@ -47,7 +48,19 @@ void Escena::inicializar(int UI_window_width,int UI_window_height) {
 //***************************************************************************
 void Escena::draw_objects() {
 
-    objeto3d -> drawObjeto3d(polygon,ajedrez);
+    switch(modo){
+
+        case '1':
+            objetoJerarquico -> dibujarAsiento();
+            //objetoJerarquico -> dibujarReposaPies();
+            //objetoJerarquico -> dibujarBase();
+            //objetoJerarquico -> dibujarSubidor();
+        break;
+
+        default:
+            objeto3d -> drawObjeto3d(polygon,ajedrez);
+        break;
+    }
 }
 
 
@@ -71,7 +84,7 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
     }
     else if (toupper(Tecla1)=='A' || toupper(Tecla1)=='P' || toupper(Tecla1)=='S'
             || toupper(Tecla1)=='T'|| toupper(Tecla1)=='C' || toupper(Tecla1)=='X'|| toupper(Tecla1)=='M' || toupper(Tecla1)=='R' || toupper(Tecla1)== '+'
-            || toupper(Tecla1)== '-'|| toupper(Tecla1)=='W'|| toupper(Tecla1)=='H' || toupper(Tecla1)=='I'|| toupper(Tecla1)=='E'){
+            || toupper(Tecla1)== '-'|| toupper(Tecla1)=='W'|| toupper(Tecla1)=='H' || toupper(Tecla1)=='I'|| toupper(Tecla1)=='E'|| Tecla1=='1'|| Tecla1=='2'){
 
             modo = toupper(Tecla1);
 
@@ -203,6 +216,7 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                     }else tapaI=true;
                     estadoAnterior();
                     break;
+
 
             }
             std::cout << "Cambiado a modo " << mostrarM << std::endl;

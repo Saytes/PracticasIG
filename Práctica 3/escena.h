@@ -9,6 +9,8 @@
 #include "objetoPLY.h"
 #include "objetoRotacion.h"
 #include "tetraedro.h"
+#include "cilindro.h"
+#include "objetoJerarquico.h"
 
 class Escena {
 private:
@@ -35,6 +37,7 @@ private:
 
 // Variables para cambiar de modo y objetos
  	Objeto3d *objeto3d;
+	ObjetoJerarquico *objetoJerarquico;
 	Objeto3d::TipoPoligono polygon;
 	std::string mostrarM, directPLY, c;
 	std::vector<Vertice> aRotar,m;

@@ -8,50 +8,50 @@ Cubo::Cubo(){
 
     //------------------------
     //V0-FRONTAL-IZQ-ABAJO
-	v1.x = 0.0;
-	v1.y = 0.0;
-	v1.z = 75.0;
+	v1.x = -0.5;
+	v1.y = -0.5;
+	v1.z = 0.5;
 	vertices.push_back(v1);
     //------------------------
     //V1-FRONTAL-DERECHA-ABAJO
-    v1.x = 75.0;
-    v1.y = 0.0;
-    v1.z = 75.0;
+    v1.x = 0.5;
+    v1.y = -0.5;
+    v1.z = 0.5;
     vertices.push_back(v1);
     //------------------------
     //V2-FRONTAL-DERECHA-ARRIBA
-    v1.x = 75.0;
-    v1.y = 75.0;
-    v1.z = 75.0;
+    v1.x = 0.5;
+    v1.y = 0.5;
+    v1.z = 0.5;
     vertices.push_back(v1);
     //------------------------
     //V3-FRONTAL-IZQ-ARRIBA
-    v1.x = 0.0;
-    v1.y = 75.0;
-    v1.z = 75.0;
+    v1.x = -0.5;
+    v1.y = 0.5;
+    v1.z = 0.5;
     vertices.push_back(v1);
     //------------------------
     //V4-TRASERO-IZQ-ABAJO
-    v1.x = 0.0;
-    v1.y = 0.0;
-    v1.z = 0.0;
+    v1.x = -0.5;
+    v1.y = -0.5;
+    v1.z = -0.5;
     vertices.push_back(v1);
     //------------------------
     //V5-TRASERO-DERECHA-ABAJO
-    v1.x = 75.0;
-    v1.y = 0.0;
-    v1.z = 0.0;
+    v1.x = 0.5;
+    v1.y = -0.5;
+    v1.z = -0.5;
     vertices.push_back(v1);
     //------------------------
     //V6-TRASERO-DERECHA-ARRIBA
-    v1.x = 75.0;
-    v1.y = 75.0;
-    v1.z = 0.0;
+    v1.x = 0.5;
+    v1.y = 0.5;
+    v1.z = -0.5;
     vertices.push_back(v1);
     //V7-TRASERO-IZQ-ARRIBA
-    v1.x = 0.0;
-    v1.y = 75.0;
-    v1.z = 0.0;
+    v1.x = -0.5;
+    v1.y = 0.5;
+    v1.z = -0.5;
     vertices.push_back(v1);
     //------------------------
 

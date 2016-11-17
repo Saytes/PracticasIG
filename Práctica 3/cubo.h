@@ -8,7 +8,6 @@ class Cubo : public Objeto3d{
 	public:
 		Cubo(); // Constructor por defecto
 
-
 	protected:
 
 };
