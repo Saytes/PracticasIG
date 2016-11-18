@@ -56,19 +56,19 @@ Cubo::Cubo(){
     //------------------------
 
     for(unsigned int i=0; i<vertices.size();i++){
-				Vertice vc;
-				vc.x = 0;
-				vc.y = 0;
-				vc.z = 0;
-				colors.push_back(vc);
-				vc.x = 1.0;
-				vc.y = 0.0;
-				vc.z = 0.0;
-				color1.push_back(vc);
-				vc.x = 0.0;
-				vc.y = 1.0;
-				vc.z = 1.0;
-				color2.push_back(vc);
+		Vertice vc;
+		vc.x = 0.0;
+		vc.y = 0.0;
+		vc.z = 0.0;
+		colors.push_back(vc);
+		vc.x = 1.0;
+		vc.y = 0.0;
+		vc.z = 0.0;
+		color1.push_back(vc);
+		vc.x = 0.0;
+		vc.y = 1.0;
+		vc.z = 1.0;
+		color2.push_back(vc);
     }
 
 	// Caras
@@ -142,7 +142,13 @@ Cubo::Cubo(){
 	for(int i = 0; i<caras.size(); i+=2){
 		caras1.push_back(caras[i]);
 		caras2.push_back(caras[i+1]);
-
 	}
 
+}
+void Cubo::cambiarColor(float v1, float v2 ,float v3){
+	for(int i=0; i< colors.size();i++){
+		colors[i].x = v1;
+		colors[i].y = v2;
+		colors[i].z = v3;
+	}
 }

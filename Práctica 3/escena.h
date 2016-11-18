@@ -42,11 +42,11 @@ private:
 	std::string mostrarM, directPLY, c;
 	std::vector<Vertice> aRotar,m;
 	Vertice v1;
-	char modo;
+	char modo,giro;
   	char* d;
-	bool ajedrez,tapaS,tapaI,boolp;
+	bool ajedrez,tapaS,tapaI,boolp, primeraVez;
 	int iteraciones,aum,dec;
-	float ang;
+	float ang, rot1, rot2, tr1;
 public:
      Escena();
 	void inicializar(int UI_window_width,int UI_window_height);

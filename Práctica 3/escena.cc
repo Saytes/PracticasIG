@@ -24,7 +24,11 @@ Escena::Escena(){
     iteraciones = 3;
     aum=0;
     dec=0;
+    rot1 = 0.0;
+    rot2 = 360.0;
+    tr1 = 0;
     ang=360.0;
+    primeraVez = true;
   	Objeto3d::TipoPoligono polygon = Objeto3d::FILL;
 }
 
@@ -50,14 +54,70 @@ void Escena::draw_objects() {
 
     switch(modo){
 
+        case 'Z':
+            objetoJerarquico -> dibujarSilla(rot1 , rot2, tr1, ajedrez);
+
+        break;
+
         case '1':
-            objetoJerarquico -> dibujarSilla();
-            //objetoJerarquico -> dibujarAsiento();
-            //objetoJerarquico -> dibujarRespaldo();
-            //objetoJerarquico -> dibujarBrazo();
-            //objetoJerarquico -> dibujarReposaPies();
-            //objetoJerarquico -> dibujarBase();
-            //objetoJerarquico -> dibujarSubidor();
+            if(rot1 == 360.0){
+                rot1 = 0.0;
+            }
+            rot1 +=  10.0;
+
+            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez);
+            modo = 'Z';
+        break;
+
+        case '2':
+            if(rot1 == 0.0){
+                rot1 = 360.0;;
+            }
+            rot1 = rot1 - 10.0;
+
+            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez);
+            modo = 'Z';
+        break;
+
+        case '3':
+            if(rot2 > 340.0){
+                std::cout<< rot2<<"\n";
+                rot2 = rot2 - 10.0;
+            }else{
+                std::cout<< "No puedes inclinar mas!\n";
+            }
+            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez);
+            modo = 'Z';
+        break;
+
+        case '4':
+            if(rot2 < 360.0){
+                rot2 = rot2 + 10.0;
+            }else{
+                std::cout<< "No puedes declinar mas!\n";
+            }
+            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez);
+            modo = 'Z';
+        break;
+
+        case '5':
+            if(tr1 < 5){
+                tr1++;
+            }else{
+                std::cout<< "No puedes subir mas!\n";
+            }
+            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez);
+            modo = 'Z';
+        break;
+
+        case '6':
+            if(tr1 > 0){
+                tr1--;
+            }else{
+                std::cout<< "No puedes bajar mas!\n";
+            }
+            modo = 'Z';
+            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez);
         break;
 
         default:
@@ -85,9 +145,13 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
 
         return 1;
     }
-    else if (toupper(Tecla1)=='A' || toupper(Tecla1)=='P' || toupper(Tecla1)=='S'
-            || toupper(Tecla1)=='T'|| toupper(Tecla1)=='C' || toupper(Tecla1)=='X'|| toupper(Tecla1)=='M' || toupper(Tecla1)=='R' || toupper(Tecla1)== '+'
-            || toupper(Tecla1)== '-'|| toupper(Tecla1)=='W'|| toupper(Tecla1)=='H' || toupper(Tecla1)=='I'|| toupper(Tecla1)=='E'|| Tecla1=='1'|| Tecla1=='2'){
+    else if (  toupper(Tecla1)=='A' || toupper(Tecla1)=='P' || toupper(Tecla1)=='S'
+            || toupper(Tecla1)=='T' || toupper(Tecla1)=='C' || toupper(Tecla1)=='X'
+            || toupper(Tecla1)=='Z' || toupper(Tecla1)=='M' || toupper(Tecla1)=='R'
+            || toupper(Tecla1)== '+'|| toupper(Tecla1)== '-'|| toupper(Tecla1)=='W'
+            || toupper(Tecla1)=='H' || toupper(Tecla1)=='I' || toupper(Tecla1)=='E'
+            || Tecla1=='1'          || Tecla1=='2'          || Tecla1=='3'
+            || Tecla1=='4'          || Tecla1=='5'          || Tecla1=='6'){
 
             modo = toupper(Tecla1);
 
@@ -113,8 +177,19 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
 
                 case 'X':
                     mostrarM="Ajedrez";
-                    polygon = Objeto3d::FILL;
-                    ajedrez=true;
+                    if(ajedrez==true){
+                        ajedrez = false;
+                    }else{ajedrez = true;}
+                    break;
+
+                case 'Z':
+                    if(!primeraVez){
+                        mostrarM="Ajedrez Silla";
+                        polygon = Objeto3d::FILL;
+                        if(ajedrez==true){
+                            ajedrez = false;
+                        }else{ajedrez = true;}
+                    }else{primeraVez = false;}
                     break;
 
                 case 'T':
@@ -143,7 +218,7 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                         //Re-inicializo como ObjetoRotacion
                         objeto3d = new ObjetoRotacion();
                         //Genero rotación
-                        objeto3d -> generaRotacion( aRotar,iteraciones, tapaS,tapaI,ang);
+                        objeto3d -> generaRotacion( aRotar,iteraciones, tapaS,tapaI,ang,0.0,0.0,0.0);
                     }
                     break;
 
@@ -200,7 +275,7 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                     v1.y = -50.0;
                     v1.z = 0.0;
                     aRotar.push_back(v1);
-                    objeto3d -> generaRotacion( aRotar, iteraciones, tapaS,tapaI,ang);
+                    objeto3d -> generaRotacion( aRotar, iteraciones, tapaS,tapaI,ang,0.0,0.0,0.0);
                     ajedrez = false;
                     break;
 
@@ -219,7 +294,6 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                     }else tapaI=true;
                     estadoAnterior();
                     break;
-
 
             }
             std::cout << "Cambiado a modo " << mostrarM << std::endl;
@@ -338,5 +412,5 @@ void Escena::estadoAnterior(){
     }
       aum=0;
       dec=0;
-    objeto3d -> generaRotacion( aRotar, iteraciones, tapaS,tapaI,ang);
+    objeto3d -> generaRotacion( aRotar, iteraciones, tapaS,tapaI,ang,0.0,0.0,0.0);
 }

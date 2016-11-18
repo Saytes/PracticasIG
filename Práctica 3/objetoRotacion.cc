@@ -5,7 +5,7 @@
 ObjetoRotacion::ObjetoRotacion(){};
 
 
-void ObjetoRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, bool tapaS, bool tapaI,float ang){
+void ObjetoRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones, bool tapaS, bool tapaI,float ang,float v1, float v2 ,float v3){
 
     bool salir = false;
     int tamIni = aRotar.size();
@@ -199,9 +199,9 @@ void ObjetoRotacion::generaRotacion(std::vector<Vertice> aRotar, int iteraciones
     //Indico el color de los vértices
     for(unsigned int i=0; i<vertices.size();i++){
     	Vertice vc;
-    	vc.x = 0;
-    	vc.y = 0;
-    	vc.z = 0;
+    	vc.x = v1;
+    	vc.y = v2;
+    	vc.z = v3;
     	colors.push_back(vc);
     	vc.x = 1.0;
     	vc.y = 0.0;

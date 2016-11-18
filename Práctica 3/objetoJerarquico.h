@@ -7,13 +7,13 @@ class ObjetoJerarquico{
 
 	public:
 		ObjetoJerarquico(); // Constructor por defecto
-		void dibujarSubidor();
-        void dibujarBase();
-        void dibujarRespaldo();
-        void dibujarAsiento();
-        void dibujarReposaPies();
-        void dibujarBrazo();
-		void dibujarSilla();
+		void dibujarSubidor(bool ajedrez);
+        void dibujarBase(int traslacion, bool ajedrez);
+        void dibujarRespaldo(bool ajedrez);
+        void dibujarAsiento(int traslacion, bool ajedrez);
+        void dibujarReposaPies(bool ajedrez);
+        void dibujarBrazo(bool ajedrez);
+		void dibujarSilla(float angulo1, float angulo2, int traslacion, bool ajedrez);
 
     private:
         Cubo cubo;
