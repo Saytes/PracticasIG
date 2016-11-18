@@ -51,7 +51,10 @@ void Escena::draw_objects() {
     switch(modo){
 
         case '1':
-            objetoJerarquico -> dibujarAsiento();
+            objetoJerarquico -> dibujarSilla();
+            //objetoJerarquico -> dibujarAsiento();
+            //objetoJerarquico -> dibujarRespaldo();
+            //objetoJerarquico -> dibujarBrazo();
             //objetoJerarquico -> dibujarReposaPies();
             //objetoJerarquico -> dibujarBase();
             //objetoJerarquico -> dibujarSubidor();

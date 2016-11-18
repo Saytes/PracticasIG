@@ -13,6 +13,7 @@ class ObjetoJerarquico{
         void dibujarAsiento();
         void dibujarReposaPies();
         void dibujarBrazo();
+		void dibujarSilla();
 
     private:
         Cubo cubo;

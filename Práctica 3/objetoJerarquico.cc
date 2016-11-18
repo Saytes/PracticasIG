@@ -8,16 +8,19 @@ ObjetoJerarquico::ObjetoJerarquico(){
 // Método que dibuja el subidor de la silla
 void ObjetoJerarquico::dibujarSubidor(){
 
+	//glScalef(30.0, 30.0,30.0);
 	glRotatef(90,0,1,0);
+		//Apoyo
 		glPushMatrix();
 			glPushMatrix();
 				glRotatef(90,0,0,1);
 				glScalef(1.0,0.1,1.0);
-				cubo.drawObjeto3d(Objeto3d::LINE,false);
+				cubo.drawObjeto3d(Objeto3d::FILL,false);
 			glPopMatrix();
+			//Palanca
 			glPushMatrix();
-				glScalef(0.1,1.0,0.1);
-				glTranslatef(0.0,1.0,0.0);
+				glTranslatef(0.0,2.5,0.0);
+				glScalef(0.1,4.0,0.1);
 				cilindro.drawObjeto3d(Objeto3d::FILL,false);
 			glPopMatrix();
 		glPopMatrix();
@@ -26,8 +29,7 @@ void ObjetoJerarquico::dibujarSubidor(){
 // Método que dibuja la base de la silla
 void ObjetoJerarquico::dibujarBase(){
 			glPushMatrix();
-				glTranslatef(1.5,0.0,0.0);
-				glTranslatef(0.0,3.0,0.0);
+				glTranslatef(4.5,4.5,0.0);
 				glRotatef(115,0,0,1);
 				glRotatef(90,0,1,0);
 				dibujarSubidor();
@@ -39,7 +41,7 @@ void ObjetoJerarquico::dibujarBase(){
 			glPopMatrix();
 			glPushMatrix();
 				glScalef(5.0,0.5,5.0);
-				cubo.drawObjeto3d(Objeto3d::FILL,false);
+				cubo.drawObjeto3d(Objeto3d::LINE,false);
 			glPopMatrix();
 
 }
@@ -78,39 +80,107 @@ void ObjetoJerarquico::dibujarReposaPies(){
 			//BASE
 			glPushMatrix();
 				glScalef(5.0,0.1,2.0);
-				cubo.drawObjeto3d(Objeto3d::FILL,false);
+				cubo.drawObjeto3d(Objeto3d::LINE,false);
 			glPopMatrix();
 		glPopMatrix();
-}
-/*BASE PUESTA EN ASIENTO
-glPushMatrix();
-	glTranslatef(0.0,-7.8,0.0);
-	dibujarBase();
-glPopMatrix();*/
-
-// Método que dibuja el asiento de la silla
-void ObjetoJerarquico::dibujarAsiento(){
-
-	glPushMatrix();
-		//ReposaPies
-		glPushMatrix();
-			glTranslatef(0.0,-5.65,7.25);
-			dibujarReposaPies();
-		glPopMatrix();
-		//Asiento
-		glPushMatrix();
-			glScalef(8.0,1.5,8.0);
-			cubo.drawObjeto3d(Objeto3d::LINE,false);
-		glPopMatrix();
-	glPopMatrix();
 }
 
 // Método que dibuja un brazo de la silla
 void ObjetoJerarquico::dibujarBrazo(){
 
+	//Parte arriba
+	glPushMatrix();
+		glTranslatef(0.0,2.2,0.0);
+		glRotatef(170,0,0,1);
+		glScalef(5.0,0.2,1.5);
+		cubo.drawObjeto3d(Objeto3d::LINE,false);
+	glPopMatrix();
+	//Parte izquierda
+	glPushMatrix();
+		glTranslatef(-2.4,1.3,0.0);
+		glRotatef(90,0,0,1);
+		glScalef(2.5,0.2,1.5);
+		cubo.drawObjeto3d(Objeto3d::LINE,false);
+	glPopMatrix();
+	//Parte derecha
+	glPushMatrix();
+		glTranslatef(2.4,0.9,0.0);
+		glRotatef(90,0,0,1);
+		glScalef(1.7,0.2,1.5);
+		cubo.drawObjeto3d(Objeto3d::LINE,false);
+	glPopMatrix();
+	//Base
+	glPushMatrix();
+		glScalef(5.0,0.2,1.5);
+		cubo.drawObjeto3d(Objeto3d::LINE,false);
+	glPopMatrix();
+}
+
+// Método que dibuja el asiento de la silla junto con la base ya creada con
+// anterioridad y los brazos
+void ObjetoJerarquico::dibujarAsiento(){
+
+	//glScalef(10.0,10.0,10.0);
+	//Brazo izquierdo
+	glPushMatrix();
+		glTranslatef(-5.7,0.9,-0.5);
+		glScalef(1.0,1.0,1.8);
+		glRotatef(270,0,1,0);
+		dibujarBrazo();
+	glPopMatrix();
+	//Brazo derecho
+	glPushMatrix();
+		glTranslatef(5.7,0.9,-0.5);
+		glScalef(1.0,1.0,1.8);
+		glRotatef(270,0,1,0);
+		dibujarBrazo();
+	glPopMatrix();
+	//ReposaPies
+	glPushMatrix();
+		glTranslatef(0.0,-5.65,8.25);
+		dibujarReposaPies();
+	glPopMatrix();
+	//Base
+	glPushMatrix();
+		glTranslatef(0.0,-7.8,0.0);
+		dibujarBase();
+	glPopMatrix();
+	//Asiento
+	glPushMatrix();
+		glScalef(13.0,1.5,10.0);
+		cubo.drawObjeto3d(Objeto3d::LINE,false);
+	glPopMatrix();
 }
 
 // Método que dibuja el respaldo de la silla
 void ObjetoJerarquico::dibujarRespaldo(){
 
+	//Cabezal
+	glPushMatrix();
+		glTranslatef(0.0,8.5,0.0);
+		glRotatef(90,1,0,0);
+		glScalef(4.0,1.5,4.0);
+		cubo.drawObjeto3d(Objeto3d::LINE,false);
+	glPopMatrix();
+	//Respaldo
+	glPushMatrix();
+		glRotatef(90,1,0,0);
+		glScalef(13.0,1.5,13.0);
+		cubo.drawObjeto3d(Objeto3d::LINE,false);
+	glPopMatrix();
+}
+
+//Método que dibuja la silla completa
+void ObjetoJerarquico::dibujarSilla(){
+
+	glScalef(10.0,10.0,10.0);
+	//Respaldo
+	glPushMatrix();
+		glTranslatef(0.0,5.8,-5.7);
+		dibujarRespaldo();
+	glPopMatrix();
+	//Base completa con brazos
+	glPushMatrix();
+		dibujarAsiento();
+	glPopMatrix();
 }
