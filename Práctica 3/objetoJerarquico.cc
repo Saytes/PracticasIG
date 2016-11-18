@@ -135,11 +135,6 @@ void ObjetoJerarquico::dibujarAsiento(){
 		glRotatef(270,0,1,0);
 		dibujarBrazo();
 	glPopMatrix();
-	//ReposaPies
-	glPushMatrix();
-		glTranslatef(0.0,-5.65,8.25);
-		dibujarReposaPies();
-	glPopMatrix();
 	//Base
 	glPushMatrix();
 		glTranslatef(0.0,-7.8,0.0);
@@ -178,6 +173,11 @@ void ObjetoJerarquico::dibujarSilla(){
 	glPushMatrix();
 		glTranslatef(0.0,5.8,-5.7);
 		dibujarRespaldo();
+	glPopMatrix();
+	//ReposaPies
+	glPushMatrix();
+		glTranslatef(0.0,-5.65,8.25);
+		dibujarReposaPies();
 	glPopMatrix();
 	//Base completa con brazos
 	glPushMatrix();
