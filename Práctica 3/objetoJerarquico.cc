@@ -8,7 +8,6 @@ ObjetoJerarquico::ObjetoJerarquico(){
 // Método que dibuja el subidor de la silla
 void ObjetoJerarquico::dibujarSubidor(){
 
-	//glScalef(30.0, 30.0,30.0);
 	glRotatef(90,0,1,0);
 		//Apoyo
 		glPushMatrix();
@@ -48,6 +47,7 @@ void ObjetoJerarquico::dibujarBase(){
 
 // Método que dibuja el reposa pies de la silla
 void ObjetoJerarquico::dibujarReposaPies(){
+	
 		glPushMatrix();
 			glPushMatrix();
 			//BARRA IZQUIERDA GRANDE
