@@ -145,10 +145,3 @@ Cubo::Cubo(){
 	}
 
 }
-void Cubo::cambiarColor(float v1, float v2 ,float v3){
-	for(int i=0; i< colors.size();i++){
-		colors[i].x = v1;
-		colors[i].y = v2;
-		colors[i].z = v3;
-	}
-}

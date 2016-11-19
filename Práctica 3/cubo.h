@@ -7,7 +7,6 @@ class Cubo : public Objeto3d{
 
 	public:
 		Cubo(); // Constructor por defecto
-		void cambiarColor(float v1,float v2,float v3);
 	protected:
 
 };

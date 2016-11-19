@@ -23,7 +23,9 @@ class Objeto3d{
 		enum TipoPoligono{
 			FILL, LINE, POINTS
 		};
-		void drawObjeto3d(TipoPoligono polygon = FILL, bool modoA=false) const;
+
+	void drawObjeto3d(TipoPoligono polygon = FILL, bool modoA=false) const;
+    void cambiarColor(float vx, float vy, float vz);
     std::vector<Vertice> getVertices();
     void setVertices(std::vector<Vertice> v);
     std::vector<Cara> getCaras();

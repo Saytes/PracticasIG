@@ -15,4 +15,5 @@ Cilindro::Cilindro(){
     v.z =  0.0;
     perfil.push_back(v);
     generaRotacion(perfil, 100, true, true,360,0.0,0.0,0.0);
+
 }

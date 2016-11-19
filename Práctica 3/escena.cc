@@ -120,6 +120,13 @@ void Escena::draw_objects() {
             objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez);
         break;
 
+        case '7':
+            //objetoJerarquico -> dibujarCuerpoT(ajedrez);
+            objetoJerarquico -> dibujarPiernasT(ajedrez);
+            //objetoJerarquico -> dibujarAbdominalesT(ajedrez
+            //objetoJerarquico -> dibujarCabezaT(ajedrez);
+        break;
+
         default:
             objeto3d -> drawObjeto3d(polygon,ajedrez);
         break;
@@ -151,7 +158,7 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
             || toupper(Tecla1)== '+'|| toupper(Tecla1)== '-'|| toupper(Tecla1)=='W'
             || toupper(Tecla1)=='H' || toupper(Tecla1)=='I' || toupper(Tecla1)=='E'
             || Tecla1=='1'          || Tecla1=='2'          || Tecla1=='3'
-            || Tecla1=='4'          || Tecla1=='5'          || Tecla1=='6'){
+            || Tecla1=='4'          || Tecla1=='5'          || Tecla1=='6'|| Tecla1=='7'){
 
             modo = toupper(Tecla1);
 
@@ -200,7 +207,7 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
 
                 case 'C':
                     mostrarM="Cubo";
-                    objeto3d = new Cubo();
+                    objeto3d = new Esfera();
                     ajedrez=false;
                     break;
 

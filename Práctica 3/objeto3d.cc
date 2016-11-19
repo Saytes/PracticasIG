@@ -60,6 +60,14 @@ void Objeto3d::drawObjeto3d(Objeto3d::TipoPoligono polygon,bool modoA) const{
 
 }
 
+void Objeto3d::cambiarColor(float vx, float vy, float vz){
+    for(int i =0; i< colors.size();i++){
+        colors[i].x = vx;
+        colors[i].y = vy;
+        colors[i].z = vz;
+    }
+}
+
 std::vector<Vertice> Objeto3d::getVertices(){
   return vertices;
 }

@@ -9,6 +9,7 @@
 #include "objetoPLY.h"
 #include "objetoRotacion.h"
 #include "tetraedro.h"
+#include "esfera.h"
 #include "cilindro.h"
 #include "objetoJerarquico.h"
 
