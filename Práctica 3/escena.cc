@@ -17,18 +17,18 @@ Escena::Escena(){
     ejes.changeAxisSize(5000);
     objeto3d = new Objeto3d();
     objetoJerarquico = new ObjetoJerarquico();
-    ajedrez=false;
-    tapaS = false;
-    tapaI = false;
-    boolp = false;
+    ajedrez =  boolp = tapaI = tapaS = dobleBajada = false;
     iteraciones = 3;
     aum=0;
     dec=0;
-    rot1 = 0.0;
+    rot1 =  0.0;
     rot2 = 360.0;
     tr1 = 0;
     ang=360.0;
-    primeraVez = true;
+    esf = 0.0;
+    transf = 400.0;
+    sca = 5.5;
+    primeraVez =  primeraVezT = true;
   	Objeto3d::TipoPoligono polygon = Objeto3d::FILL;
 }
 
@@ -54,8 +54,14 @@ void Escena::draw_objects() {
 
     switch(modo){
 
-        case 'Z':
-            objetoJerarquico -> dibujarSilla(rot1 , rot2, tr1, ajedrez);
+        case 'S':
+            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez , sca);
+
+        break;
+
+        case 'T':
+            transf = 400.0;
+            objetoJerarquico -> dibujarTransformacion(ajedrez , sca);
 
         break;
 
@@ -65,8 +71,8 @@ void Escena::draw_objects() {
             }
             rot1 +=  10.0;
 
-            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez);
-            modo = 'Z';
+            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez,   sca);
+            modo = 'S';
         break;
 
         case '2':
@@ -75,8 +81,8 @@ void Escena::draw_objects() {
             }
             rot1 = rot1 - 10.0;
 
-            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez);
-            modo = 'Z';
+            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez,  sca);
+            modo = 'S';
         break;
 
         case '3':
@@ -86,8 +92,8 @@ void Escena::draw_objects() {
             }else{
                 std::cout<< "No puedes inclinar mas!\n";
             }
-            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez);
-            modo = 'Z';
+            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez,   sca);
+            modo = 'S';
         break;
 
         case '4':
@@ -96,8 +102,8 @@ void Escena::draw_objects() {
             }else{
                 std::cout<< "No puedes declinar mas!\n";
             }
-            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez);
-            modo = 'Z';
+            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez,   sca);
+            modo = 'S';
         break;
 
         case '5':
@@ -106,8 +112,8 @@ void Escena::draw_objects() {
             }else{
                 std::cout<< "No puedes subir mas!\n";
             }
-            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez);
-            modo = 'Z';
+            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez,   sca);
+            modo = 'S';
         break;
 
         case '6':
@@ -116,15 +122,41 @@ void Escena::draw_objects() {
             }else{
                 std::cout<< "No puedes bajar mas!\n";
             }
-            modo = 'Z';
-            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez);
+            objetoJerarquico -> dibujarSilla(rot1, rot2, tr1, ajedrez,   sca);
+            modo = 'S';
         break;
 
         case '7':
-            //objetoJerarquico -> dibujarCuerpoT(ajedrez);
-            objetoJerarquico -> dibujarPiernasT(ajedrez);
-            //objetoJerarquico -> dibujarAbdominalesT(ajedrez
-            //objetoJerarquico -> dibujarCabezaT(ajedrez);
+            if(transf > 0.0){
+                transf = transf - 100.0;
+            }
+            /*if(sca > 0.0){
+                sca = sca - 0.5;
+            }*/
+            objetoJerarquico -> dibujarTransformacion(ajedrez , sca);
+            modo = 'T';
+        break;
+
+        case '8':
+            if(transf < 400.0){
+                transf += 100.0;
+            }
+            /*if(sca < 7.5){
+                sca = sca + 0.5;
+            }*/
+            objetoJerarquico -> dibujarTransformacion(ajedrez , sca);
+            modo = 'T';
+        break;
+
+        case '9':
+            if(esf == 360.0){
+                esf=0.0;
+            }
+            if(esf < 360.0){
+                esf +=10.0;
+            }
+            objetoJerarquico -> dibujarTransformacion(ajedrez , sca);
+            modo = 'T';
         break;
 
         default:
@@ -158,7 +190,8 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
             || toupper(Tecla1)== '+'|| toupper(Tecla1)== '-'|| toupper(Tecla1)=='W'
             || toupper(Tecla1)=='H' || toupper(Tecla1)=='I' || toupper(Tecla1)=='E'
             || Tecla1=='1'          || Tecla1=='2'          || Tecla1=='3'
-            || Tecla1=='4'          || Tecla1=='5'          || Tecla1=='6'|| Tecla1=='7'){
+            || Tecla1=='4'          || Tecla1=='5'          || Tecla1=='6'
+            || Tecla1=='7'          || Tecla1=='8'          || Tecla1=='9'){
 
             modo = toupper(Tecla1);
 
@@ -176,7 +209,7 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                     ajedrez=false;
                     break;
 
-                case 'S':
+                case 'F':
                     mostrarM="Sólido";
                     polygon = Objeto3d::FILL;
                     ajedrez=false;
@@ -189,26 +222,26 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                     }else{ajedrez = true;}
                     break;
 
-                case 'Z':
+                case 'S':
                     if(!primeraVez){
                         mostrarM="Ajedrez Silla";
                         polygon = Objeto3d::FILL;
+                        primeraVezT = true;
                         if(ajedrez==true){
-                            ajedrez = false;
-                        }else{ajedrez = true;}
+                            //ajedrez = false;
+                        }else{/*ajedrez = true;*/}
                     }else{primeraVez = false;}
                     break;
 
                 case 'T':
-                    mostrarM="Tetraedro";
-                    objeto3d = new Tetraedro();
-                    ajedrez=false;
-                    break;
-
-                case 'C':
-                    mostrarM="Cubo";
-                    objeto3d = new Esfera();
-                    ajedrez=false;
+                    if(!primeraVezT){
+                        mostrarM="Ajedrez Transformacion";
+                        polygon = Objeto3d::FILL;
+                        primeraVez = true;
+                        if(ajedrez == true){
+                            //ajedrez = false;
+                        }else{/*ajedrez = true;*/}
+                    }else{primeraVezT = false;}
                     break;
 
                 case 'M':
@@ -236,12 +269,6 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                         //Cargo el directorio del PLY
                         std::cout<<"Introduzca la direccion del fichero PLY" <<std::endl;
                         std::getline(cin,directPLY);
-                        int tamD = directPLY.size();
-                        string extension = directPLY.substr(tamD-5);
-                        if(extension != ".ply"){
-                            std::cout<< "El archivo introducido no contiene la extensión, se le añadirá automáticamente.\n";
-                            directPLY.append(".ply");
-                        }
                         std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
 
                         objeto3d = new ObjetoPLY(&d[0]);

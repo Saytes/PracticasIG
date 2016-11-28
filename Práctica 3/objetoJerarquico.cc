@@ -202,9 +202,9 @@ void ObjetoJerarquico::dibujarRespaldo(bool ajedrez){
 }
 
 //Método que dibuja la silla completa
-void ObjetoJerarquico::dibujarSilla(float angulo1, float angulo2, int traslacion, bool ajedrez){
+void ObjetoJerarquico::dibujarSilla(float angulo1, float angulo2, int traslacion, bool ajedrez, float sca){
 	glPushMatrix();
-		glScalef(5.0,5.0,5.0);
+		glScalef(sca,sca,sca);
 		//Base con subidor
 		glPushMatrix();
 			glTranslatef(0.0,-7.8,0.0);
@@ -231,6 +231,7 @@ void ObjetoJerarquico::dibujarSilla(float angulo1, float angulo2, int traslacion
 				glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();
+
 }
 
 
@@ -439,10 +440,87 @@ void ObjetoJerarquico::dibujarHachaT(bool ajedrez){
 	glPopMatrix();
 }
 
-void ObjetoJerarquico::dibujarCuerpoT(bool ajedrez){
+void ObjetoJerarquico::dibujarPieT(bool ajedrez){
 
 	glPushMatrix();
-		glRotatef(25,1,0,0);
+		//glScalef(10.0,10.0,10.0);
+		glRotatef(-90,0,0,1);
+		//BASE
+		glPushMatrix();
+			glScalef(2.5,0.1,2.0);
+			cubo.cambiarColor(0.0,0.0,0.0);
+			cubo.drawObjeto3d(Objeto3d::LINE,ajedrez);
+			cubo.cambiarColor(0.5,0.5,0.5);
+			cubo.drawObjeto3d(Objeto3d::FILL,ajedrez);
+			glPopMatrix();
+			glPushMatrix();
+			glTranslatef(0.0,-0.5,0.0);
+			glRotatef(25,1,0,0);
+			glPushMatrix();
+			//BARRA GRANDE
+				glTranslatef(0.0,2.65,-2.75);
+				glRotatef(150,1,0,0);
+				glScalef(0.1,5.0,0.1);
+				cilindro.drawObjeto3d(Objeto3d::FILL,ajedrez);
+			glPopMatrix();
+			//BARRA PEQUEÑA
+			glPushMatrix();
+				glTranslatef(0.0,0.25,-1.25);
+				glRotatef(135,1,0,0);
+				glScalef(0.1,0.75,0.1);
+				cilindro.drawObjeto3d(Objeto3d::FILL,ajedrez);
+			glPopMatrix();
+		glPopMatrix();
+	glPopMatrix();
+}
+
+void ObjetoJerarquico::dibujarPiernasT(bool ajedrez){
+
+	glPushMatrix();
+		glRotatef(90,0,0,1);
+		//Pierna derecha
+		glPushMatrix();
+			glRotatef(-10,0,0,1);
+			glPushMatrix();
+				glTranslatef(0.0,4.0,0.0);
+				glScalef(9.5,4.0,1.0);
+				cubo.cambiarColor(0.0,0.0,0.0);
+				cubo.drawObjeto3d(Objeto3d::LINE,ajedrez);
+				cubo.cambiarColor(0.5,0.35,0.05);
+				cubo.drawObjeto3d(Objeto3d::FILL,ajedrez);
+			glPopMatrix();
+			//Pie derecho
+			glPushMatrix();
+				glTranslatef(-6.0,4.0,1.3);
+				dibujarPieT(ajedrez);
+			glPopMatrix();
+		glPopMatrix();
+
+		//Pierna izq
+		glPushMatrix();
+			glRotatef(10,0,0,1);
+			glPushMatrix();
+				glTranslatef(0.0,-4.0,0.0);
+				glScalef(9.5,4.0,1.0);
+				cubo.cambiarColor(0.0,0.0,0.0);
+				cubo.drawObjeto3d(Objeto3d::LINE,ajedrez);
+				cubo.cambiarColor(0.5,0.35,0.05);
+				cubo.drawObjeto3d(Objeto3d::FILL,ajedrez);
+			glPopMatrix();
+			//Pie izquierdo
+			glPushMatrix();
+				glTranslatef(-6.0,-4.0,1.3);
+				dibujarPieT(ajedrez);
+			glPopMatrix();
+		glPopMatrix();
+	glPopMatrix();
+
+}
+
+void ObjetoJerarquico::dibujarTransformacion(bool ajedrez,float sca){
+	glPushMatrix();
+		glScalef(sca,sca,sca);
+		glTranslatef(0.0,5.0,0.0);
 			//Cabeza
 			glPushMatrix();
 				glTranslatef(0.0,10.0,0.0);
@@ -450,6 +528,17 @@ void ObjetoJerarquico::dibujarCuerpoT(bool ajedrez){
 			glPopMatrix();
 			glPushMatrix();
 				glTranslatef(0.0,-1.0,0.0);
+				//Piernas
+				glPushMatrix();
+					glTranslatef(0.0,-12.0,0.0);
+					dibujarPiernasT(ajedrez);
+				glPopMatrix();
+				//"COLA"(Subidor)
+				glPushMatrix();
+					glTranslatef(0.0,-8.0,-3.5);
+					glRotatef(45, 1,0,0);
+					dibujarSubidor(ajedrez);
+				glPopMatrix();
 				//Brazo izq
 				glPushMatrix();
 					glRotatef(-15,0,0,1);
@@ -478,28 +567,43 @@ void ObjetoJerarquico::dibujarCuerpoT(bool ajedrez){
 				dibujarTroncoT(ajedrez);
 			glPopMatrix();
 		glPopMatrix();
+
 }
-
-void ObjetoJerarquico::dibujarPiernasT(bool ajedrez){
-
-	glScalef(10.0,10.0,10.0);
-	glRotatef(90,0,0,1);
+void ObjetoJerarquico::dibujaEsT(bool ajedrez, float esf, float sca){
 	glPushMatrix();
-		glRotatef(-10,0,0,1);
-		glTranslatef(0.0,4.0,0.0);
-		glScalef(9.5,4.0,1.0);
-		cubo.cambiarColor(0.0,0.0,0.0);
-		cubo.drawObjeto3d(Objeto3d::LINE,ajedrez);
-		cubo.cambiarColor(0.5,0.35,0.05);
-		cubo.drawObjeto3d(Objeto3d::FILL,ajedrez);
-	glPopMatrix();
-	glPushMatrix();
-		glRotatef(10,0,0,1);
-		glTranslatef(0.0,-4.0,0.0);
-		glScalef(9.5,4.0,1.0);
-		cubo.cambiarColor(0.0,0.0,0.0);
-		cubo.drawObjeto3d(Objeto3d::LINE,ajedrez);
-		cubo.cambiarColor(0.5,0.35,0.05);
-		cubo.drawObjeto3d(Objeto3d::FILL,ajedrez);
+		glRotatef(esf,0,1,0);
+		glTranslatef(0.0,(20.0),0.0);
+		glScalef(250.0+sca,250.0+sca,250.0+sca);
+		esfera.cambiarColor(1.0,1.0,1.0);
+		esfera.drawObjeto3d(Objeto3d::LINE,ajedrez);
+		esfera.cambiarColor(0.0,0.0,0.0);
+		esfera.drawObjeto3d(Objeto3d::FILL,ajedrez);
 	glPopMatrix();
 }
+
+/* void ObjetoJerarquico::animacionT(float t, bool ajedrez,float sca){
+
+	float s1; // Escalado de la silla
+	float alfa; //Giro de la silla
+	float beta=0.0; //Ángulo de la inclinación de la silla
+	float traslacion=0.0; //Traslación de la silla en el origen
+
+	if(t < 1/3){
+		vObj = 1;
+	}else if(t > 1/3 && t < 2/3){
+		vObj = 2;
+	}else if(t > 2/3){
+		vObj = 3;
+	}
+
+	switch (vObj) {
+		case 1:
+			s1 = sca * (1 - t/0.33);
+			alfa = t*360;
+			dibujarSilla(alfa, beta, traslacion, false, s1);
+		break;
+
+		/*case 2:
+			s2 = sca * ()
+	}
+}*/

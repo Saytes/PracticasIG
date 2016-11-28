@@ -45,9 +45,10 @@ private:
 	Vertice v1;
 	char modo,giro;
   	char* d;
-	bool ajedrez,tapaS,tapaI,boolp, primeraVez;
+	bool ajedrez,tapaS,tapaI,boolp, primeraVez, primeraVezT, dobleBajada;
 	int iteraciones,aum,dec;
 	float ang, rot1, rot2, tr1;
+	float transf,esf,sca;
 public:
      Escena();
 	void inicializar(int UI_window_width,int UI_window_height);

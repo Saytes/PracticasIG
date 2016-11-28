@@ -104,7 +104,7 @@ glutInitWindowPosition(UI_window_pos_x,UI_window_pos_y);
 glutInitWindowSize(UI_window_width,UI_window_height);
 
 // llamada para crear la ventana, indicando el titulo
-glutCreateWindow("Práctica 1: Jorge Gutiérrez Segovia");
+glutCreateWindow("Práctica 2: Jorge Gutiérrez Segovia");
 
 // asignación de la funcion llamada "dibujar" al evento de dibujo
 glutDisplayFunc(draw_scene);

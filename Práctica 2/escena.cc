@@ -114,7 +114,7 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                     break;
 
                 case 'M':
-                    {
+                {
                         mostrarM = "Rotacion a un PLY";
                         //Compruebo iteraciones y cargo el directorio del PLY
                         iteraciones= comprobarIteraciones();
@@ -127,9 +127,9 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                         //Re-inicializo como ObjetoRotacion
                         objeto3d = new ObjetoRotacion();
                         //Genero rotación
-                        objeto3d -> generaRotacion( aRotar,iteraciones, tapaS,tapaI,ang);
-                    }
-                    break;
+                        objeto3d -> generaRotacion( aRotar,iteraciones, tapaS,tapaI,ang,0.0,0.0,0.0);
+                }
+                break;
 
               case 'R':
                     {
@@ -138,12 +138,6 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
                         //Cargo el directorio del PLY
                         std::cout<<"Introduzca la direccion del fichero PLY" <<std::endl;
                         std::getline(cin,directPLY);
-                        int tamD = directPLY.size();
-                        string extension = directPLY.substr(tamD-5);
-                        if(extension != ".ply"){
-                            std::cout<< "El archivo introducido no contiene la extensión, se le añadirá automáticamente.\n";
-                            directPLY.append(".ply");
-                        }
                         std::vector<char> d(directPLY.c_str(), directPLY.c_str() + directPLY.size() + 1);
 
                         objeto3d = new ObjetoPLY(&d[0]);
