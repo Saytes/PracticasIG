@@ -46,9 +46,9 @@ private:
 	char modo,giro;
   	char* d;
 	bool ajedrez,tapaS,tapaI,boolp, primeraVez, primeraVezT, dobleBajada;
-	int iteraciones,aum,dec;
+	int iteraciones,aum,dec, nveces;
 	float ang, rot1, rot2, tr1;
-	float transf,esf,sca;
+	float transf,esf,sca, prueba;
 public:
      Escena();
 	void inicializar(int UI_window_width,int UI_window_height);
