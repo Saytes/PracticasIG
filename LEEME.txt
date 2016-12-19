@@ -1,0 +1,19 @@
+Práctica realizada por Jorge Gutiérrez Segovia, alumno del grupo C1.
+
+Instrucciones de compilación:
+-Entrar en la carpeta Práctica 2 desde el terminal.
+-Ejecutar Make.
+
+Instrucciones de ejecución{
+-  ./prueba para ejecutar el programa
+- Una vez dentro{
+	-Tecla S para dibujar la Silla
+}
+
+- Una vez dibujada la silla{
+	
+	-Tecla 1 y 2 = Rotar sentido horario y antihorario(Primer grado de libertad)
+	-Tecla 3 y 4 = Inclinar y declinar la silla(Segundo grado de libertad)
+	-Tecla 5 y 6 = Subir y bajar la silla(Tercer grado de libertad)
+}
+
