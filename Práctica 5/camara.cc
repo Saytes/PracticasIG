@@ -112,14 +112,18 @@ void Camara::girar(int x, int y){
 }
 
 void Camara::examinar(int x, int y){
-	float angulox, anguloy;
-	float radio;
 
-	angulox = (x*1.0)/100;
-	anguloy = (y*1.0)/100;
-	radio = sqrt(((camara.x - objetivo.x)*(camara.x - objetivo.x)) + ((camara.y - objetivo.y)*(camara.y - objetivo.y)) + ((camara.z - objetivo.z)*(camara.z - objetivo.z)));
-	camara.x = objetivo.x + radio * cos(angulox)* sin(anguloy);
-	camara.y = objetivo.y + radio * sin(angulox)* sin(anguloy);
-	camara.z = objetivo.z + radio * cos(anguloy);
+	//Enlace https://es.wikipedia.org/wiki/Esfera#Ecuaci.C3.B3n_param.C3.A9trica
+	float angulox, anguloy;
+	float radioCircunferencia;
+
+	angulox = (x*1.0)/75;
+	anguloy = (y*1.0)/75;
+
+	radioCircunferencia = sqrt( ((camara.x - objetivo.x)*(camara.x - objetivo.x)) + ((camara.y - objetivo.y)*(camara.y - objetivo.y)) + ((camara.z - objetivo.z)*(camara.z - objetivo.z)) );
+
+	camara.x = objetivo.x + radioCircunferencia * cos(angulox)* sin(anguloy);
+	camara.y = objetivo.y + radioCircunferencia * sin(angulox)* sin(anguloy);
+	camara.z = objetivo.z + radioCircunferencia * cos(anguloy);
 
 }
