@@ -1,4 +1,4 @@
-//Archivo perteneciente a la P2 de Jorge Gutiérrez Segovia grupo C1
+//Archivo perteneciente a la P4 de Jorge Gutiérrez Segovia grupo C1
 
 #include "objetoRotacion.h"
 

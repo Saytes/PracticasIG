@@ -1,4 +1,4 @@
-//Archivo perteneciente a la P3 de Jorge Gutiérrez Segovia grupo C1
+//Archivo perteneciente a la P4 de Jorge Gutiérrez Segovia grupo C1
 #ifndef _OBJETOJERARQUICO_H
 #define _OBJETOJERARQUICO_H
 #include "cilindro.h"
