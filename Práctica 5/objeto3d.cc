@@ -68,51 +68,6 @@ void Objeto3d::cambiarColor(float vx, float vy, float vz){
     }
 }
 
-void Objeto3d::generarNormales(std::vector<Cara> caras, std::vector<Vertice> vertices, std::vector<Normal> &normalCaras, std::vector<Normal> &normalVertices ){
-
-    Normal inicializar;
-    inicializar.v0 = 0.0;
-    inicializar.v1 = 0.0;
-    inicializar.v2 = 0.0;
-    normalVertices = std::vector<Normal> (vertices.size(),inicializar); //Vector que contiene las normales de los vértices
-    //Generar normales de las caras
-	for(unsigned int i=0; i<caras.size();i++){
-
-		Cara c = caras[i];
-		float v;
-        int v0,v1,v2; //Indices para acceder al vector de vértices
-        v0 = c.v0;
-        v1 = c.v1;
-        v2 = c.v2;
-
-		//Vector Vertices 0-1
-		Normal primerV, segundoV, normalC;
-        primerV.crearVector(vertices[v0],vertices[v1]);
-
-		//Vector Vertices 0-2
-        segundoV.crearVector(vertices[v0],vertices[v2]);
-
-        //Genero la cara normal
-        //Genero la perpendicular con los dos normales anteriores
-        normalC.crearPerpendicular(primerV, segundoV);
-
-        //Normalizo la perpendicular creada con anterioridad
-		normalC.normalizar();
-
-		//Añado al vector de las normales de las caras(cada vector una cara)
-		normalCaras.push_back(normalC);
-
-        //Sumo las normales a los vértices
-        normalVertices[v0]+= normalC;
-        normalVertices[v1]+= normalC;
-        normalVertices[v2]+= normalC;
-    }
-
-    for(unsigned int i = 0; i<normalVertices.size();i++){
-        normalVertices[i].normalizar();
-    }
-}
-
 std::vector<Vertice> Objeto3d::getVertices(){
   return vertices;
 }
@@ -127,4 +82,40 @@ std::vector<Cara> Objeto3d::getCaras(){
 }
 
 void Objeto3d::generaRotacion(std::vector<Vertice> aRotar,int iteraciones, bool tapaS, bool tapaI,float anguloRotacion,float v1, float v2 ,float v3){
+}
+
+Vertice Objeto3d::cajaEnvolvente(){
+	float max_x, min_x;
+	float max_y, min_y;
+	float max_z, min_z;
+
+	max_x = min_x = vertices[0].x;
+	max_y = min_y = vertices[0].y;
+	max_z = min_z = vertices[0].z;
+
+	for(int i=1; i<vertices.size(); i++){
+
+		if(vertices[i].x < min_x)
+			min_x = vertices[i].x;
+		else if(vertices[i].x > max_x)
+			max_x = vertices[i].x;
+
+		if(vertices[i].y < min_y)
+			min_y = vertices[i].y;
+		else if(vertices[i].y > max_y)
+			max_y = vertices[i].y;
+
+		if(vertices[i].z < min_z)
+			min_z = vertices[i].z;
+		else if(vertices[i].z > max_z)
+			max_z = vertices[i].z;
+	}
+
+	Vertice centro;
+
+	centro.x = (max_x - min_x) + min_x;
+	centro.y = (max_y - min_y) + min_y;
+	centro.z = (max_z - min_z) + min_z;
+
+	return centro;
 }
