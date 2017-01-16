@@ -33,6 +33,10 @@ Escena::Escena(){
     cam[0].verticalCamara(0,1,0);
     cam[1].verticalCamara(0,1,0);
     cam[2].verticalCamara(0,1,0);
+
+    cam[0].direccionCamara(cam[0].up,cam[0].at);
+    cam[1].direccionCamara(cam[1].up,cam[1].at);
+    cam[2].direccionCamara(cam[2].up,cam[2].at);
 }
 
 void Escena::inicializar(int UI_window_width,int UI_window_height) {
@@ -146,9 +150,9 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
 
                 case 'E':
                 	Vertice centro = objeto3d -> cajaEnvolvente();
-        			cam[camaraActiva].objetivo.x = centro.x;
-        			cam[camaraActiva].objetivo.y = centro.y;
-        			cam[camaraActiva].objetivo.z = centro.z;
+        			cam[camaraActiva].at.x = centro.x;
+        			cam[camaraActiva].at.y = centro.y;
+        			cam[camaraActiva].at.z = centro.z;
         			modoExaminar = true;
                     mostrarM = "Modo examinar abierto";
                     break;
@@ -248,8 +252,9 @@ void Escena::pick( int x, int y) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glFrustum(-Width,Width,-Height,Height,Front_plane,Back_plane);
-	if(hits!=0)
-		procesarHits(hits,selectBuf);
+	if(hits!=0){
+        procesarHits(hits,selectBuf);
+    }
 
     std::cout << "He realizado el pick" << std::endl;
 }

@@ -7,8 +7,8 @@ class Camara{
 
     public:
         //Variables
-        Vertice camara, objetivo, vertical;
-        Vertice camaraInicial, objetivoInicial, verticalInicial;
+        Vertice eye, at, up, dir, derecha;
+        Vertice eyeInicial, atInicial, upInicial, dirInicial, derechaInicial;
 
         //Constructor por defecto
         Camara();
@@ -17,6 +17,7 @@ class Camara{
         void posicionCamara(int x, int y, int z);
         void objetivoCamara(int x, int y, int z);
         void verticalCamara(int x, int y, int z);
+        void direccionCamara(Vertice up, Vertice at);
         //Métodos para el manejo de la cámara
         void moverArriba();
         void moverAbajo();

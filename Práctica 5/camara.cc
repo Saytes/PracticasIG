@@ -8,107 +8,127 @@
 
 Camara::Camara(){
 
-	camara.x = 0;
-	camara.y = 0;
-	camara.z = 0;
+	eye.x = 0;
+	eye.y = 0;
+	eye.z = 0;
 
-	objetivo.x = 0;
-	objetivo.y = 0;
-	objetivo.z = 0;
+	at.x = 0;
+	at.y = 0;
+	at.z = 0;
 
-	vertical.x = 0;
-	vertical.y = 1;
-	vertical.z = 0;
-
+	up.x = 0;
+	up.y = 1;
+	up.z = 0;
 }
 
 void Camara::ponerObservador(){
 
-	gluLookAt(camara.x, camara.y, camara.z, objetivo.x, objetivo.y, objetivo.z, vertical.x, vertical.y, vertical.z);
+	gluLookAt(eye.x, eye.y, eye.z, at.x, at.y, at.z, up.x, up.y, up.z);
 
 }
 
 void Camara::posicionCamara(int x, int y, int z){
 
-	camaraInicial.x = camara.x = x;
-	camaraInicial.y = camara.y = y;
-	camaraInicial.z = camara.z = z;
+	eyeInicial.x = eye.x = x;
+	eyeInicial.y = eye.y = y;
+	eyeInicial.z = eye.z = z;
 
 }
 
 void Camara::objetivoCamara(int x, int y, int z){
 
-	objetivoInicial.x = objetivo.x = x;
-	objetivoInicial.y = objetivo.y = y;
-	objetivoInicial.z = objetivo.z = z;
+	atInicial.x = at.x = x;
+	atInicial.y = at.y = y;
+	atInicial.z = at.z = z;
 
 }
 
 void Camara::verticalCamara(int x, int y, int z){
 
-	verticalInicial.x = vertical.x = x;
-	verticalInicial.y = vertical.y = y;
-	verticalInicial.z = vertical.z = z;
+	upInicial.x = up.x = x;
+	upInicial.y = up.y = y;
+	upInicial.z = up.z = z;
 
+}
+
+void Camara::direccionCamara(Vertice up, Vertice at){
+
+		 dir.crearVector(eye, at);
+		 dirInicial = dir;
+
+		derecha.prodVectorial(up, dir);
+		derechaInicial = derecha;
 }
 
 void Camara::moverArriba(){
 
-	camara.y+=5;
-	objetivo.y+=5;
+	eye.y+=5;
+	at.y+=5;
 }
 
 void Camara::moverAbajo(){
 
-	camara.y-=5;
-	objetivo.y-=5;
+	eye.y-=5;
+	at.y-=5;
 }
 
 void Camara::moverDerecha(){
 
-	camara.x+=5;
-	objetivo.x+=5;
+	eye.x+=(derecha.x*5);
+	eye.y+=(derecha.y*5);
+	eye.z+=(derecha.z*5);
 }
 
 void Camara::moverIzquierda(){
 
-	camara.x-=5;
-	objetivo.x-=5;
+	eye.x-=(derecha.x*5);
+	eye.y-=(derecha.y*5);
+	eye.z-=(derecha.z*5);
 }
 
 void Camara::moverDentro(){
 
-	camara.z-=5;
-	objetivo.z-=5;
+	eye.x+=(dir.x*5);
+	eye.y+=(dir.y*5);
+	eye.z+=(dir.z*5);
 }
 
 void Camara::moverFuera(){
 
-	camara.z+=5;
-	objetivo.z+=5;
+	eye.x-=(dir.x*5);
+	eye.y-=(dir.y*5);
+	eye.z-=(dir.z*5);
 }
 
 void Camara::restablecer(){
 
-	camara.x = camaraInicial.x;
-	camara.y = camaraInicial.y;
-	camara.z = camaraInicial.z;
-
-	objetivo.x = objetivoInicial.x;
-	objetivo.y = objetivoInicial.y;
-	objetivo.z = objetivoInicial.z;
-
-	vertical.x = verticalInicial.x;
-	vertical.y = verticalInicial.y;
-	vertical.z = verticalInicial.z;
+	eye = eyeInicial;
+	at = atInicial;
+	up = upInicial;
+	dir = dirInicial;
+	derecha = derechaInicial;
 
 }
 
 void Camara::girar(int x, int y){
 
-	objetivo.x += x/75;
-	objetivo.y += y/75;
+	float angulox = ((x*1.0)*M_PI)/180;
+	float anguloy = ((y*1.0)*M_PI)/180;
 
+	if(x!=0){
+		dir.x = dir.x;
+		dir.y = (cos(angulox)*dir.y) + (sin(angulox)*(dir.z));
+		dir.z = (-1.0)*(sin(angulox)*dir.y)+(cos(angulox)*(dir.z));
+	}
+	if(y!=0){
+		dir.x = (cos(anguloy)*dir.x) + (sin(anguloy)*(dir.z));
+		dir.y = dir.y;
+		dir.z = (-1.0)*(sin(anguloy)*dir.x)+(cos(anguloy)*(dir.z));
+	}
+	/*
+	eye.x+=(dir.x);
+	eye.y+=(dir.y);
+	eye.z+=(dir.z);*/
 }
 
 void Camara::examinar(int x, int y){
@@ -120,10 +140,10 @@ void Camara::examinar(int x, int y){
 	angulox = (x*1.0)/75;
 	anguloy = (y*1.0)/75;
 
-	radioCircunferencia = sqrt( ((camara.x - objetivo.x)*(camara.x - objetivo.x)) + ((camara.y - objetivo.y)*(camara.y - objetivo.y)) + ((camara.z - objetivo.z)*(camara.z - objetivo.z)) );
+	radioCircunferencia = sqrt( ((eye.x - at.x)*(eye.x - at.x)) + ((eye.y - at.y)*(eye.y - at.y)) + ((eye.z - at.z)*(eye.z - at.z)) );
 
-	camara.x = objetivo.x + radioCircunferencia * cos(angulox)* sin(anguloy);
-	camara.y = objetivo.y + radioCircunferencia * sin(angulox)* sin(anguloy);
-	camara.z = objetivo.z + radioCircunferencia * cos(anguloy);
+	eye.x = at.x + radioCircunferencia * cos(angulox)* sin(anguloy);
+	eye.y = at.y + radioCircunferencia * sin(angulox)* sin(anguloy);
+	eye.z = at.z + radioCircunferencia * cos(anguloy);
 
 }

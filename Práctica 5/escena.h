@@ -41,6 +41,7 @@ private:
 	int camaraActiva;
 	static const unsigned int BUFSIZE = 1024;
 	GLuint selectBuf[BUFSIZE];
+
 public:
      Escena();
 	void inicializar(int UI_window_width,int UI_window_height);
